@@ -9,7 +9,7 @@ forbidden imports; license check blocks non-allowed dependencies.
 | ID | Title | Type | Size | Depends on | Status |
 |----|-------|------|------|------------|--------|
 | P0-01 | Initialize repository and workspace | infra | S | — | done |
-| P0-02 | Turborepo task pipeline | infra | S | P0-01 | todo |
+| P0-02 | Turborepo task pipeline | infra | S | P0-01 | done |
 | P0-03 | Shared TypeScript and build presets | infra | S | P0-01 | done |
 | P0-04 | Scaffold all packages | infra | M | P0-03 | todo |
 | P0-05 | Lint, format and environment-boundary rules | infra | M | P0-03, P0-04 | todo |
@@ -40,8 +40,9 @@ forbidden imports; license check blocks non-allowed dependencies.
 - **Depends on:** P0-01
 - **Refs:** [ADR 0002](../decisions/0002-monorepo-tooling.md)
 - **Done when:**
-  - [ ] `turbo.json` defines `build`, `typecheck`, `lint`, `test`, `dev` with correct `dependsOn` and outputs.
-  - [ ] Root scripts `pnpm build|test|lint|typecheck` run through Turbo with caching.
+  - [x] `turbo.json` defines `build`, `typecheck`, `lint`, `test`, `dev` with correct `dependsOn` and outputs.
+  - [x] Root scripts `pnpm build|test|lint|typecheck` run through Turbo with caching.
+  - Verified with two throwaway packages (not committed): topological order (`^build` built the dependency before its consumer), content-based cache (full re-run → `FULL TURBO`, ~5.4s → 34ms), and cache invalidation on a source edit (`inputs`). `dev` is `cache: false, persistent: true` and has no real task to run yet (added in P0-10/P0-04).
 
 ### P0-03 · Shared TypeScript and build presets
 - **Type:** infra · **Package:** `tooling/` · **Size:** S
