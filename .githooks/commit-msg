@@ -1,0 +1,37 @@
+#!/bin/sh
+# Enforces the commit convention described in CONTRIBUTING.md:
+# a single Conventional Commits line, no body, no trailers.
+
+msg_file="$1"
+
+# Ignore comment lines and everything below the scissors line.
+msg=$(sed -e '/^# -* >8 -*$/,$d' -e '/^#/d' "$msg_file")
+
+first=$(printf '%s\n' "$msg" | grep -v '^[[:space:]]*$' | head -n 1)
+
+# Let git's own merge and autosquash messages through.
+case "$first" in
+  "Merge "*|"fixup! "*|"squash! "*|"amend! "*) exit 0 ;;
+esac
+
+fail() {
+  echo "commit-msg: $1" >&2
+  echo "  got: $first" >&2
+  echo "  see CONTRIBUTING.md#commit-messages" >&2
+  exit 1
+}
+
+lines=$(printf '%s\n' "$msg" | grep -cv '^[[:space:]]*$')
+[ "$lines" -eq 1 ] || fail "message must be a single line (no body, no trailers)"
+
+pattern='^(feat|fix|docs|refactor|perf|test|build|ci|chore|style|revert)(\([a-z0-9-]+\))?!?: [^ A-Z].*$'
+printf '%s\n' "$first" | grep -Eq "$pattern" \
+  || fail "expected '<type>(<scope>)?: <description>' with a lowercase description"
+
+case "$first" in
+  *.) fail "description must not end with a period" ;;
+esac
+
+[ "${#first}" -le 72 ] || fail "message is ${#first} characters; the limit is 72"
+
+exit 0
