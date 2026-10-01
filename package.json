@@ -1,0 +1,13 @@
+{
+  "name": "kairon-render",
+  "private": true,
+  "description": "Kairon Render — scene-first, React-powered video rendering engine.",
+  "license": "MIT",
+  "engines": {
+    "node": ">=22"
+  },
+  "packageManager": "pnpm@11.22.0",
+  "scripts": {
+    "prepare": "git config core.hooksPath .githooks"
+  }
+}

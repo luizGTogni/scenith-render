@@ -8,7 +8,7 @@ forbidden imports; license check blocks non-allowed dependencies.
 
 | ID | Title | Type | Size | Depends on | Status |
 |----|-------|------|------|------------|--------|
-| P0-01 | Initialize repository and workspace | infra | S | — | doing |
+| P0-01 | Initialize repository and workspace | infra | S | — | done |
 | P0-02 | Turborepo task pipeline | infra | S | P0-01 | todo |
 | P0-03 | Shared TypeScript and build presets | infra | S | P0-01 | todo |
 | P0-04 | Scaffold all packages | infra | M | P0-03 | todo |
@@ -30,10 +30,10 @@ forbidden imports; license check blocks non-allowed dependencies.
 - **Refs:** [ADR 0002](../decisions/0002-monorepo-tooling.md)
 - **Done when:**
   - [x] Git repository initialized, `.gitignore`, `.gitattributes`, commit convention and `commit-msg` hook.
-  - [ ] `.editorconfig`.
-  - [ ] Root `prepare` script runs `git config core.hooksPath .githooks`.
-  - [ ] `.nvmrc` / `engines` pin Node.js LTS; `packageManager` pins pnpm.
-  - [ ] `pnpm-workspace.yaml` includes `packages/*`, `apps/*`, `examples/*`, `tests/*`.
+  - [x] `.editorconfig`.
+  - [x] Root `prepare` script runs `git config core.hooksPath .githooks`.
+  - [x] `.nvmrc` / `engines` pin Node.js LTS; `packageManager` pins pnpm.
+  - [x] `pnpm-workspace.yaml` includes `packages/*`, `apps/*`, `examples/*`, `tests/*`.
 
 ### P0-02 · Turborepo task pipeline
 - **Type:** infra · **Package:** root · **Size:** S
