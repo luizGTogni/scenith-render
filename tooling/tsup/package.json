@@ -1,0 +1,16 @@
+{
+  "name": "@kairon/tsup-config",
+  "version": "0.0.0",
+  "private": true,
+  "license": "MIT",
+  "type": "module",
+  "main": "./index.js",
+  "types": "./index.d.ts",
+  "files": [
+    "index.js",
+    "index.d.ts"
+  ],
+  "dependencies": {
+    "tsup": "^8.5.1"
+  }
+}

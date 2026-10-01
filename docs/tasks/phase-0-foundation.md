@@ -10,7 +10,7 @@ forbidden imports; license check blocks non-allowed dependencies.
 |----|-------|------|------|------------|--------|
 | P0-01 | Initialize repository and workspace | infra | S | — | done |
 | P0-02 | Turborepo task pipeline | infra | S | P0-01 | todo |
-| P0-03 | Shared TypeScript and build presets | infra | S | P0-01 | todo |
+| P0-03 | Shared TypeScript and build presets | infra | S | P0-01 | done |
 | P0-04 | Scaffold all packages | infra | M | P0-03 | todo |
 | P0-05 | Lint, format and environment-boundary rules | infra | M | P0-03, P0-04 | todo |
 | P0-06 | Vitest setup | infra | S | P0-03 | todo |
@@ -48,9 +48,10 @@ forbidden imports; license check blocks non-allowed dependencies.
 - **Depends on:** P0-01
 - **Refs:** [04 — conventions](../04-packages.md#naming-and-code-conventions)
 - **Done when:**
-  - [ ] Base `tsconfig` with `strict`, `noUncheckedIndexedAccess`, `exactOptionalPropertyTypes`.
-  - [ ] Separate presets for browser (DOM lib) and Node (no DOM lib) packages.
-  - [ ] Shared `tsup` preset producing ESM + type declarations.
+  - [x] Base `tsconfig` with `strict`, `noUncheckedIndexedAccess`, `exactOptionalPropertyTypes`.
+  - [x] Separate presets for browser (DOM lib) and Node (no DOM lib) packages.
+  - [x] Shared `tsup` preset producing ESM + type declarations.
+  - Verified with a throwaway package built against each preset (not committed): `noUncheckedIndexedAccess` catches an unguarded index, the Node preset has no DOM lib, the browser preset compiles JSX against a `react` peer, and `tsup` + `@kairon/tsup-config` emit ESM and a `.d.ts`. Pinned `typescript` to `5.9.3` because `tsup`'s declaration bundler is not yet compatible with `typescript@7` (see [tooling/README.md](../../tooling/README.md)).
 
 ### P0-04 · Scaffold all packages
 - **Type:** infra · **Package:** all · **Size:** M

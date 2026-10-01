@@ -6,6 +6,7 @@ Kairon is a pnpm + Turborepo monorepo (see [ADR 0002](decisions/0002-monorepo-to
 
 ```
 kairon-render/
+├── tooling/            shared, unpublished config (tsconfig, tsup presets)
 ├── packages/
 │   ├── core/          @kairon/core        timeline, hooks, keyframes, holds
 │   ├── schema/        @kairon/schema      scene format, validation, patches, SceneView

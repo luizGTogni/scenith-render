@@ -9,5 +9,8 @@
   "packageManager": "pnpm@11.22.0",
   "scripts": {
     "prepare": "git config core.hooksPath .githooks"
+  },
+  "devDependencies": {
+    "typescript": "5.9.3"
   }
 }

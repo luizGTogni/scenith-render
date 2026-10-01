@@ -1,5 +1,8 @@
 packages:
+  - "tooling/*"
   - "packages/*"
   - "apps/*"
   - "examples/*"
   - "tests/*"
+allowBuilds:
+  esbuild: true
