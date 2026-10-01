@@ -8,7 +8,7 @@
  */
 export function kaironPreset(options = {}) {
   return {
-    entry: ["src/index.ts"],
+    entry: ["src/index.{ts,tsx}"],
     format: ["esm"],
     dts: true,
     sourcemap: true,

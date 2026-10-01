@@ -11,7 +11,7 @@ forbidden imports; license check blocks non-allowed dependencies.
 | P0-01 | Initialize repository and workspace | infra | S | — | done |
 | P0-02 | Turborepo task pipeline | infra | S | P0-01 | done |
 | P0-03 | Shared TypeScript and build presets | infra | S | P0-01 | done |
-| P0-04 | Scaffold all packages | infra | M | P0-03 | todo |
+| P0-04 | Scaffold all packages | infra | M | P0-03 | done |
 | P0-05 | Lint, format and environment-boundary rules | infra | M | P0-03, P0-04 | todo |
 | P0-06 | Vitest setup | infra | S | P0-03 | todo |
 | P0-07 | Changesets with fixed versioning | infra | S | P0-04 | todo |
@@ -59,10 +59,11 @@ forbidden imports; license check blocks non-allowed dependencies.
 - **Depends on:** P0-03
 - **Refs:** [04 — layout](../04-packages.md#repository-layout), [ADR 0007](../decisions/0007-mit-license.md)
 - **Done when:**
-  - [ ] `core`, `schema`, `media`, `captions`, `transitions`, `player`, `bundler`, `renderer`, `cli` exist with `src/index.ts`, README, `"license": "MIT"`.
-  - [ ] `@kairon/schema` exposes two entries: root and `/react`.
-  - [ ] `react` is a peer dependency of browser packages (React 19).
-  - [ ] Every package builds and exports one placeholder symbol with a test.
+  - [x] `core`, `schema`, `media`, `captions`, `transitions`, `player`, `bundler`, `renderer`, `cli` exist with `src/index.(ts|tsx)`, README, `"license": "MIT"`.
+  - [x] `@kairon/schema` exposes two entries: root (`tsconfig.json`, no DOM lib) and `/react` (`tsconfig.react.json`, DOM + JSX); both type-check and build (`tsconfig.build.json` for bundling only).
+  - [x] `react` is a peer dependency of browser packages (`core`, `media`, `captions`, `transitions`, `player`) and an optional peer of `schema` (only its `/react` entry needs it).
+  - [x] Every package builds, type-checks and exports one placeholder with a passing test (`pnpm build|typecheck|test` all green across all 9 packages). Browser placeholders return a typed `ReactElement`, proving DOM + JSX; Node placeholders call `node:os`, proving the Node lib; `schema`'s root placeholder is a plain constant, proving no DOM/Node leak into the isomorphic entry.
+  - Pinned `typescript@5.9.3` (not `7.x`, see [tooling/README.md](../../tooling/README.md)) also fixed `tsup`'s dts build for all packages. Fixed `kaironPreset`'s default entry glob (`src/index.{ts,tsx}`) to match `.tsx` placeholder sources — it previously only matched `.ts`.
 
 ### P0-05 · Lint, format and environment-boundary rules
 - **Type:** infra · **Package:** `tooling/` · **Size:** M
