@@ -5,14 +5,14 @@ This document explains the mental model. Everything else builds on it.
 ## Frames, not time
 
 A video is a list of still images (frames) shown at a fixed rate (fps).
-Kairon never asks "what time is it?" — it asks "which frame am I rendering?".
+Scenith never asks "what time is it?" — it asks "which frame am I rendering?".
 
 ```
 frame:   0    1    2    3   ...   89
 time:    0s  1/30 2/30 3/30 ...  2.97s     (at 30 fps)
 ```
 
-Because rendering only depends on the frame number, Kairon can render frames
+Because rendering only depends on the frame number, Scenith can render frames
 out of order, in parallel, on different machines, and always get the same
 result.
 
@@ -28,7 +28,7 @@ result.
 ## The scene
 
 A **scene** is a JSON document that fully describes a video. It is the main
-way to use Kairon (see [08 — Scene Schema](08-scene-schema.md)).
+way to use Scenith (see [08 — Scene Schema](08-scene-schema.md)).
 
 ```
 Scene
@@ -46,7 +46,7 @@ length (`duration`), a **clip type** and props.
 - **Built-in clip types:** `text`, `image`, `video`, `audio`, `shape`,
   `captions`.
 - **Custom clip types:** React components registered with
-  `defineClipType()`. This is how developers extend Kairon.
+  `defineClipType()`. This is how developers extend Scenith.
 
 Inside a clip, time is **relative**: frame 0 is the clip's first frame.
 Keyframes and `useFrame()` inside a clip use clip-relative frames.
@@ -130,7 +130,7 @@ To guarantee that a frame always renders the same:
 2. Use `random(seed)` instead of `Math.random()`.
 3. Do not use `Date.now()`, timers, or CSS animations for motion.
 4. Load all async resources behind holds.
-5. Use Kairon media components instead of raw `<video>`/`<audio>`.
+5. Use Scenith media components instead of raw `<video>`/`<audio>`.
 
 These rules are also what make incremental rendering safe. Dev mode warns
 about common violations.
@@ -144,4 +144,4 @@ which one:
 |-------------|-------|-------------------|
 | `player` | Browser, inside `<Player>` | The player's clock (real time). |
 | `rendering` | Headless Chromium | The renderer, one frame at a time. |
-| `preview` | Local `kairon preview` app | The preview timeline. |
+| `preview` | Local `scenith preview` app | The preview timeline. |

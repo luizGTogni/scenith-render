@@ -4,7 +4,7 @@ Word-by-word animated captions, the style common in short-form video.
 
 ## Scope
 
-Kairon **renders** captions from word timings it receives. It does not
+Scenith **renders** captions from word timings it receives. It does not
 transcribe, translate or decide which words to emphasize. The caller (an
 editor, an AI pipeline) gets timings from a speech-to-text service and puts
 them in the scene.
@@ -40,7 +40,7 @@ place in the schema that uses milliseconds. At render time:
 `frame = round(ms / 1000 * fps)`.
 
 Validation: `start < end`, words sorted, no overlaps
-(`KAIRON_E_CAPTION_OVERLAP`). Words outside the clip duration produce a
+(`SCENITH_E_CAPTION_OVERLAP`). Words outside the clip duration produce a
 warning and are not shown.
 
 ## Grouping into pages
@@ -113,12 +113,12 @@ const words = cuesToWords(cues);     // splits each cue across its words
 `cuesToWords` spreads each cue's time across its words in proportion to
 character count and marks them `"estimated": true`. Word-level transcription
 gives much better results; adapters for specific transcription services live
-in the caller, not in Kairon.
+in the caller, not in Scenith.
 
 ## React usage
 
 ```tsx
-import { Captions } from "@kairon-render/captions";
+import { Captions } from "@scenith-render/captions";
 
 <Captions words={words} preset="highlight" style={{ activeColor: "#00E0FF" }} />
 ```

@@ -29,11 +29,11 @@ a YAML front-matter section. The front matter section is used to mark
 packages for release, and which semver bump type(s) should occur. The
 markdown content is used for the changelog.
 
-## Kairon specifics
+## Scenith specifics
 
 See [docs/tasks/phase-0-foundation.md](../docs/tasks/phase-0-foundation.md)
 (P0-07) and [ADR 0002](../docs/decisions/0002-monorepo-tooling.md): all
-`@kairon-render/*` product packages (`core`, `schema`, `media`, `captions`,
+`@scenith-render/*` product packages (`core`, `schema`, `media`, `captions`,
 `transitions`, `player`, `bundler`, `renderer`, `cli`) are in one `fixed`
 group, so they are always released together at the same version. The
 `tooling/*` packages are private and are never released, so they are

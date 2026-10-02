@@ -1,7 +1,7 @@
 # 08 — Scene Schema
 
 The scene schema is a JSON format that fully describes a video. It is
-Kairon's primary input (see [ADR 0009](decisions/0009-scene-first.md)) and
+Scenith's primary input (see [ADR 0009](decisions/0009-scene-first.md)) and
 the contract with editors and AI agents
 (see [ADR 0005](decisions/0005-json-scene-schema.md)).
 
@@ -77,7 +77,7 @@ the contract with editors and AI agents
 | **Animations** | Keyframe lists on numeric or color properties (`opacity`, `x`, `y`, `scale`, `rotation`, ...). Keyframe frames are clip-relative. |
 | **Transitions** | `transitionIn` / `transitionOut` presets at clip edges. |
 | **Assets** | Media referenced by id, so a file can be reused and replaced in one place. |
-| **Metadata** | Free-form data for the host application. Never read by Kairon. |
+| **Metadata** | Free-form data for the host application. Never read by Scenith. |
 
 Positions use **normalized coordinates** (0–1) by default so a scene adapts
 to different aspect ratios; pixel units are opt-in (`"unit": "px"`).
@@ -97,7 +97,7 @@ animated captions. See [12 — Captions](12-captions.md).
 ## Metadata
 
 Every **scene, track, clip and asset** accepts an optional `metadata`
-object. Kairon stores it and passes it through untouched; it never
+object. Scenith stores it and passes it through untouched; it never
 interprets it.
 
 Typical uses: the editor's lock/selection state, the AI prompt or
@@ -123,7 +123,7 @@ Rules:
 Custom React components become clip types:
 
 ```ts
-import { defineClipType } from "@kairon-render/schema";
+import { defineClipType } from "@scenith-render/schema";
 
 export const LowerThird = defineClipType({
   name: "lower-third",
@@ -164,7 +164,7 @@ clips are reordered.
 ## Runtime
 
 ```tsx
-import { SceneView } from "@kairon-render/schema/react";
+import { SceneView } from "@scenith-render/schema/react";
 
 <SceneView scene={scene} registry={registry} />
 ```
@@ -186,7 +186,7 @@ render. Most users never use it directly.
 
 ## AI integration contract
 
-Kairon does not call any AI model. It gives callers what they need:
+Scenith does not call any AI model. It gives callers what they need:
 
 1. **Generate** — prompt + `toJsonSchema()` → model returns a scene →
    `validateScene()` → errors are fed back to the model for repair.

@@ -76,7 +76,7 @@ chunks: 0 ... 5 | 6 (360–419) | 7 (420–479) | 8 ... 29
 ## Limits
 
 - **Code-based compositions.** For a whole video written as one React
-  component, Kairon cannot know which frames depend on which props. By
+  component, Scenith cannot know which frames depend on which props. By
   default the key uses all props, so any change re-renders everything.
   See [Code-based compositions](#code-based-compositions) for the three
   ways around this.

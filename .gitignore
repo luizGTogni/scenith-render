@@ -7,7 +7,7 @@ dist/
 
 # Tooling caches
 .turbo/
-.kairon/
+.scenith/
 coverage/
 .vite/
 

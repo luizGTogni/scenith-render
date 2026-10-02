@@ -1,7 +1,7 @@
 import path from "node:path";
 import { Linter } from "eslint";
 import { describe, expect, it } from "vitest";
-import { kaironConfig } from "./index.js";
+import { scenithConfig } from "./index.js";
 
 /**
  * These are the fixture tests required by docs/tasks/phase-0-foundation.md
@@ -16,10 +16,10 @@ function ruleIds(messages) {
   return messages.map((m) => m.ruleId);
 }
 
-describe("kaironConfig: environment boundaries", () => {
+describe("scenithConfig: environment boundaries", () => {
   it("forbids a browser package from importing a Node built-in", () => {
     const root = path.resolve(import.meta.dirname, "../../packages/core");
-    const config = kaironConfig({
+    const config = scenithConfig({
       package: "core",
       environment: "browser",
       tsconfigRootDir: root,
@@ -37,7 +37,7 @@ describe("kaironConfig: environment boundaries", () => {
 
   it("forbids a Node package from referencing a browser-only global", () => {
     const root = path.resolve(import.meta.dirname, "../../packages/renderer");
-    const config = kaironConfig({
+    const config = scenithConfig({
       package: "renderer",
       environment: "node",
       tsconfigRootDir: root,
@@ -49,9 +49,9 @@ describe("kaironConfig: environment boundaries", () => {
     expect(ruleIds(messages)).toContain("no-restricted-globals");
   });
 
-  it("forbids the @kairon-render/schema root entry from importing react", () => {
+  it("forbids the @scenith-render/schema root entry from importing react", () => {
     const root = path.resolve(import.meta.dirname, "../../packages/schema");
-    const config = kaironConfig({
+    const config = scenithConfig({
       package: "schema",
       environment: "isomorphic",
       allowedInternalDeps: ["core", "media", "captions", "transitions"],
@@ -70,11 +70,11 @@ describe("kaironConfig: environment boundaries", () => {
     expect(ruleIds(messages)).toContain("no-restricted-imports");
   });
 
-  it("forbids importing a @kairon-render/* package outside the dependency graph", () => {
+  it("forbids importing a @scenith-render/* package outside the dependency graph", () => {
     // docs/04-packages.md#dependency-graph: `media` may depend on `core`
     // only, never on another leaf package like `captions`.
     const root = path.resolve(import.meta.dirname, "../../packages/media");
-    const config = kaironConfig({
+    const config = scenithConfig({
       package: "media",
       environment: "browser",
       allowedInternalDeps: ["core"],
@@ -83,7 +83,7 @@ describe("kaironConfig: environment boundaries", () => {
     const linter = new Linter({ cwd: root });
 
     const messages = linter.verify(
-      'import "@kairon-render/captions";\n',
+      'import "@scenith-render/captions";\n',
       config,
       "src/index.tsx",
     );
@@ -93,7 +93,7 @@ describe("kaironConfig: environment boundaries", () => {
 
   it("allows an import that the dependency graph permits", () => {
     const root = path.resolve(import.meta.dirname, "../../packages/media");
-    const config = kaironConfig({
+    const config = scenithConfig({
       package: "media",
       environment: "browser",
       allowedInternalDeps: ["core"],
@@ -102,7 +102,7 @@ describe("kaironConfig: environment boundaries", () => {
     const linter = new Linter({ cwd: root });
 
     const messages = linter.verify(
-      'import "@kairon-render/core";\n',
+      'import "@scenith-render/core";\n',
       config,
       "src/index.tsx",
     );

@@ -12,13 +12,13 @@ validate/normalize round trip unchanged.
 | **Decisions** |||||
 | P1-01 | ADR: scene versioning and migration policy | adr | S | — | todo |
 | P1-02 | ADR: text layout model | adr | S | — | todo |
-| **Data model** — `@kairon-render/schema` |||||
+| **Data model** — `@scenith-render/schema` |||||
 | P1-03 | Scene types and Zod schemas | feat | M | P0-13, P1-01 | todo |
 | P1-04 | Animation, keyframe and easing schemas | feat | S | P1-03 | todo |
 | P1-05 | `validateScene` with paths and codes | feat | M | P1-03, P1-04 | todo |
 | P1-06 | `normalizeScene` and metadata preservation | feat | M | P1-05 | todo |
 | P1-07 | Clip type registry | feat | M | P1-05 | todo |
-| **Runtime** — `@kairon-render/core`, `@kairon-render/media` |||||
+| **Runtime** — `@scenith-render/core`, `@scenith-render/media` |||||
 | P1-08 | Frame context, `Clip` and timeline hooks | feat | M | P0-04 | todo |
 | P1-09 | `Track`, `Repeat`, `FreezeFrame`, `Layer` | feat | M | P1-08 | todo |
 | P1-10 | `animate` with numeric keyframes | feat | M | P0-04 | todo |
@@ -33,7 +33,7 @@ validate/normalize round trip unchanged.
 | P1-19 | `text` clip type | feat | M | P1-02, P1-18, P1-17 | todo |
 | P1-20 | `<Image>` and `image` clip type | feat | M | P1-14, P1-18 | todo |
 | P1-21 | `shape` clip type | feat | S | P1-18 | todo |
-| **Driver** — `@kairon-render/player` |||||
+| **Driver** — `@scenith-render/player` |||||
 | P1-22 | Player core: clock, seek, scene mode, scaling | feat | L | P1-15, P1-18 | todo |
 | P1-23 | `PlayerRef` API and events | feat | M | P1-22 | todo |
 | P1-24 | Buffering and error boundary | feat | M | P1-22 | todo |
@@ -127,7 +127,7 @@ validate/normalize round trip unchanged.
 ### P1-10 · `animate` with numeric keyframes
 - **Type:** feat · **Package:** core · **Size:** M
 - **Depends on:** P0-04
-- **Refs:** [09 — animation](../09-api-design.md#kaironcore)
+- **Refs:** [09 — animation](../09-api-design.md#scenith-rendercore)
 - **Done when:**
   - [ ] `animate(frame, keyframes, { before, after })`; default `hold`.
   - [ ] Easing applies to the segment arriving at a keyframe.
@@ -137,7 +137,7 @@ validate/normalize round trip unchanged.
 - **Type:** feat · **Package:** core · **Size:** M
 - **Depends on:** P1-10
 - **Done when:**
-  - [ ] Named curves from [09](../09-api-design.md#kaironcore), `cubicBezier`, function easings.
+  - [ ] Named curves from [09](../09-api-design.md#scenith-rendercore), `cubicBezier`, function easings.
   - [ ] Spring easing normalized to the segment duration (reaches the target at the end keyframe).
   - [ ] Implemented from public math references; sources listed in the PR.
 
@@ -159,7 +159,7 @@ validate/normalize round trip unchanged.
 - **Refs:** [02 — holds](../02-core-concepts.md#render-holds-async-readiness)
 - **Done when:**
   - [ ] `useHold(label, { timeoutMs })` returns `{ release }`; release is idempotent.
-  - [ ] Hold registry exposes "all released" as a promise; timeout produces `KAIRON_E_HOLD_TIMEOUT` with the label.
+  - [ ] Hold registry exposes "all released" as a promise; timeout produces `SCENITH_E_HOLD_TIMEOUT` with the label.
 
 ### P1-15 · Frame driver contract and asset usage registry
 - **Type:** feat · **Package:** core · **Size:** M
@@ -198,7 +198,7 @@ validate/normalize round trip unchanged.
 ### P1-20 · `<Image>` and `image` clip type
 - **Type:** feat · **Package:** media, schema · **Size:** M
 - **Depends on:** P1-14, P1-18
-- **Done when:** [ ] `<Image>` holds until decoded (`img.decode()`); [ ] `fit` (cover, contain, fill); [ ] decode errors become `KAIRON_E_MEDIA_LOAD` with the src.
+- **Done when:** [ ] `<Image>` holds until decoded (`img.decode()`); [ ] `fit` (cover, contain, fill); [ ] decode errors become `SCENITH_E_MEDIA_LOAD` with the src.
 
 ### P1-21 · `shape` clip type
 - **Type:** feat · **Package:** schema (`/react`) · **Size:** S

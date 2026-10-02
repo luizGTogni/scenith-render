@@ -1,4 +1,4 @@
-# Kairon Render — agent instructions
+# Scenith Render — agent instructions
 
 - All files (code, docs, comments, ADRs) are written in English.
 - Design lives in [`docs/`](docs/README.md); work is planned in

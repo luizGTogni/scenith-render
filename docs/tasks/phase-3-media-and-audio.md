@@ -12,20 +12,20 @@ with audio in sync (±1 frame) and matches the player; output with
 | P3-01 | ADR: media frame server protocol and decoder lifecycle | adr | S | — | todo |
 | **Data model** |||||
 | P3-02 | `video` and `audio` clip schemas | feat | S | P1-07 | todo |
-| **Media services** — `@kairon-render/renderer` |||||
+| **Media services** — `@scenith-render/renderer` |||||
 | P3-03 | Remote media cache and asset fingerprints | feat | M | P2-09 | todo |
 | P3-04 | Media frame server | feat | L | P3-01, P2-08, P3-03 | todo |
 | P3-05 | `probeMedia` in Node | feat | S | P2-08 | todo |
-| **Runtime** — `@kairon-render/media` |||||
+| **Runtime** — `@scenith-render/media` |||||
 | P3-06 | `<Video>` in rendering mode | feat | M | P3-04, P2-06 | todo |
 | P3-07 | `<Video>` and `<Audio>` in player mode | feat | L | P1-22 | todo |
 | P3-08 | Asset usage reporting for `<Video>` and `<Audio>` | feat | M | P1-15 | todo |
 | P3-09 | `video` and `audio` clip types | feat | M | P3-02, P3-06, P3-07, P3-08 | todo |
 | P3-10 | `<Gif>` | feat | M | P1-14 | todo |
 | P3-11 | `preload`, `publicUrl`, browser `probeMedia` | feat | S | P1-14 | todo |
-| **Driver** — `@kairon-render/player` |||||
+| **Driver** — `@scenith-render/player` |||||
 | P3-12 | Audio clock and autoplay handling | feat | M | P3-07 | todo |
-| **Output: audio** — `@kairon-render/renderer` |||||
+| **Output: audio** — `@scenith-render/renderer` |||||
 | P3-13 | Audio timeline from scene and from `collectAssets` | feat | M | P3-02, P3-08 | todo |
 | P3-14 | Audio mixer | feat | L | P3-13 | todo |
 | P3-15 | Loudness normalization | feat | M | P3-14 | todo |
@@ -92,7 +92,7 @@ with audio in sync (±1 frame) and matches the player; output with
 ### P3-11 · `preload`, `publicUrl`, browser `probeMedia`
 - **Type:** feat · **Package:** media · **Size:** S
 - **Depends on:** P1-14
-- **Done when:** [ ] API per [09](../09-api-design.md#kaironmedia); [ ] browser `probeMedia` documents which fields it cannot provide (e.g. fps).
+- **Done when:** [ ] API per [09](../09-api-design.md#scenith-rendermedia); [ ] browser `probeMedia` documents which fields it cannot provide (e.g. fps).
 
 ### P3-12 · Audio clock and autoplay handling
 - **Type:** feat · **Package:** player · **Size:** M

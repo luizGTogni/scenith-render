@@ -9,7 +9,7 @@ one pull request each. Every task traces back to a doc or an ADR.
 |------|-------|------|
 | [phase-0-foundation.md](phase-0-foundation.md) | 0 | Monorepo, CI, rules of the road. |
 | [phase-1-scene-runtime-and-player.md](phase-1-scene-runtime-and-player.md) | 1 | A scene plays in the browser. |
-| [phase-2-server-rendering.md](phase-2-server-rendering.md) | 2 | `kairon render scene.json out.mp4`. |
+| [phase-2-server-rendering.md](phase-2-server-rendering.md) | 2 | `scenith render scene.json out.mp4`. |
 | [phase-3-media-and-audio.md](phase-3-media-and-audio.md) | 3 | Video, audio, mixing, loudness. |
 | [phase-4-captions-transitions-ai.md](phase-4-captions-transitions-ai.md) | 4 | Captions, transitions, AI tooling. |
 | [phase-5-performance-and-extensibility.md](phase-5-performance-and-extensibility.md) | 5 | Parallel + incremental rendering, code extensions. |
@@ -23,11 +23,11 @@ architecture layers ([03](../03-architecture.md#layers-of-responsibility)):
 
 ```
 1. Decisions     ADRs and spikes that later tasks depend on
-2. Data model    schema types, validation        (@kairon-render/schema)
-3. Runtime       timeline, animation, clip types (@kairon-render/core, media, captions, ...)
-4. Drivers       player and page bridge          (@kairon-render/player, bridge)
-5. Output        capture, encoding, audio        (@kairon-render/renderer)
-6. Interface     CLI, preview app                (@kairon-render/cli, apps)
+2. Data model    schema types, validation        (@scenith-render/schema)
+3. Runtime       timeline, animation, clip types (@scenith-render/core, media, captions, ...)
+4. Drivers       player and page bridge          (@scenith-render/player, bridge)
+5. Output        capture, encoding, audio        (@scenith-render/renderer)
+6. Interface     CLI, preview app                (@scenith-render/cli, apps)
 7. Verification  tests that prove the phase exit criteria
 ```
 

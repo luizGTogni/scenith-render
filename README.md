@@ -1,10 +1,10 @@
-# Kairon Render
+# Scenith Render
 
-[![CI](https://github.com/luizGTogni/kairon-render/actions/workflows/ci.yml/badge.svg)](https://github.com/luizGTogni/kairon-render/actions/workflows/ci.yml)
+[![CI](https://github.com/luizGTogni/scenith-render/actions/workflows/ci.yml/badge.svg)](https://github.com/luizGTogni/scenith-render/actions/workflows/ci.yml)
 
 > Video from data. Frame-perfect, deterministic, AI-ready.
 
-Kairon Render turns a JSON **scene** — written by an editor, an AI agent or a
+Scenith Render turns a JSON **scene** — written by an editor, an AI agent or a
 developer — into a video. It renders each frame with React in headless
 Chromium and encodes the result with FFmpeg. Developers extend it with
 custom clip types written in React.
@@ -17,7 +17,7 @@ custom clip types written in React.
     "id": "main",
     "clips": [{
       "id": "title", "type": "text", "from": 0, "duration": 90,
-      "props": { "text": "Hello Kairon", "fontSize": 96 },
+      "props": { "text": "Hello Scenith", "fontSize": 96 },
       "animations": [{ "property": "opacity", "keyframes": [
         { "frame": 0, "value": 0 }, { "frame": 30, "value": 1, "easing": "easeOut" }
       ] }]
@@ -27,7 +27,7 @@ custom clip types written in React.
 ```
 
 ```bash
-kairon render scene.json out/hello.mp4
+scenith render scene.json out/hello.mp4
 ```
 
 ## Status

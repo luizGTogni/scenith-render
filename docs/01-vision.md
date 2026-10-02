@@ -2,26 +2,26 @@
 
 ## One sentence
 
-Kairon Render turns a JSON scene — written by an editor, an AI agent or a
+Scenith Render turns a JSON scene — written by an editor, an AI agent or a
 developer — into a frame-perfect video, using React as its rendering engine.
 
 ## Why build it
 
 - **Ownership.** Existing React-to-video engines are source-available with
-  commercial restrictions. Kairon is MIT licensed and fully independent.
+  commercial restrictions. Scenith is MIT licensed and fully independent.
 - **Scene first.** Video created by AI and edited in a UI needs a
-  structured, validatable data format. In Kairon the scene is the primary
+  structured, validatable data format. In Scenith the scene is the primary
   input, not an add-on (see [ADR 0009](decisions/0009-scene-first.md)).
 - **Editor-ready.** An interactive editor needs fast seeking, live updates
-  and fast re-exports after small edits. Kairon is designed for that loop.
+  and fast re-exports after small edits. Scenith is designed for that loop.
 
 ## Who it is for
 
 | User | Needs |
 |------|-------|
-| **Video editors** (e.g. the Kairon web editor) | Preview player, scene format, export API, incremental re-export. |
+| **Video editors** (e.g. the Scenith web editor) | Preview player, scene format, export API, incremental re-export. |
 | **AI agents** | A schema they can generate and patch, with validation and clear errors. |
-| **Backend services** | `kairon render scene.json out.mp4` — no build step, no code. |
+| **Backend services** | `scenith render scene.json out.mp4` — no build step, no code. |
 | **Developers** | Custom clip types written in React to extend what scenes can show. |
 
 ## Principles
@@ -56,10 +56,10 @@ developer — into a frame-perfect video, using React as its rendering engine.
 
 ## Non-goals (for now)
 
-- A visual editor. That is a separate product built **on top of** Kairon.
-- AI model hosting or prompting logic. Kairon exposes the schema; the
+- A visual editor. That is a separate product built **on top of** Scenith.
+- AI model hosting or prompting logic. Scenith exposes the schema; the
   caller owns the AI integration.
-- Speech-to-text. Kairon renders captions from timings it receives; it does
+- Speech-to-text. Scenith renders captions from timings it receives; it does
   not transcribe audio.
 - Interpreting application data. `metadata` fields are preserved, never read.
 - API compatibility with other video engines

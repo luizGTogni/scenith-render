@@ -11,16 +11,16 @@ The first draft of the docs treated React code as the primary way to make a
 video and the JSON scene as an add-on scheduled late in the roadmap. That
 left three problems:
 
-- Kairon's main users (editors, AI agents, backend services) work with data,
+- Scenith's main users (editors, AI agents, backend services) work with data,
   not code.
-- Incremental export is impossible to design for arbitrary code: Kairon
+- Incremental export is impossible to design for arbitrary code: Scenith
   cannot know which frames depend on which props.
-- A code-first React API puts Kairon in direct, API-level competition with
+- A code-first React API puts Scenith in direct, API-level competition with
   existing engines, which pushes the API toward imitation.
 
 ## Decision
 
-The **scene** is Kairon's primary input and its product identity.
+The **scene** is Scenith's primary input and its product identity.
 
 - Every feature is designed for the scene JSON first; the React API exposes
   the same model in code.
@@ -45,7 +45,7 @@ The **scene** is Kairon's primary input and its product identity.
 ## Consequences
 
 - + Scenes are safe to generate, store, diff, patch and validate.
-- + `kairon render scene.json out.mp4` works out of the box.
+- + `scenith render scene.json out.mp4` works out of the box.
 - + Incremental export becomes possible
   ([13](../13-incremental-rendering.md)).
 - + A clearly different product, with its own API vocabulary

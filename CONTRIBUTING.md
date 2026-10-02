@@ -7,8 +7,8 @@ Prerequisites: Node.js (version pinned in [`.nvmrc`](.nvmrc)) and pnpm
 picks it up automatically, or install it yourself to match).
 
 ```bash
-git clone git@github.com:luizGTogni/kairon-render.git
-cd kairon-render
+git clone git@github.com:luizGTogni/scenith-render.git
+cd scenith-render
 pnpm install   # also runs `prepare`, which enables the commit-msg hook
 ```
 
@@ -28,18 +28,18 @@ Turborepo, scoped to the packages it touches, with caching — see
 | `pnpm changeset` | Record a change for the next release (see [Versioning](#versioning-changesets)). |
 
 Scope any command to one package with `--filter`, e.g.
-`pnpm --filter @kairon-render/core test`. To try the engine interactively,
-`pnpm --filter @kairon-render/playground dev` starts the sandbox app
+`pnpm --filter @scenith-render/core test`. To try the engine interactively,
+`pnpm --filter @scenith-render/playground dev` starts the sandbox app
 (see [apps/playground](apps/playground/README.md)).
 
 FFmpeg is not needed yet for Phase 0/1 work. It becomes a prerequisite once
 rendering work starts (Phase 2+) — see
-[ADR 0008](docs/decisions/0008-ffmpeg-not-bundled.md) for why Kairon never
+[ADR 0008](docs/decisions/0008-ffmpeg-not-bundled.md) for why Scenith never
 bundles it and how it's located.
 
 ## Clean room and naming
 
-Kairon is built as an **independent implementation**, not derived from
+Scenith is built as an **independent implementation**, not derived from
 Remotion or any other restricted-license codebase — see
 [docs/11-legal-and-clean-room.md](docs/11-legal-and-clean-room.md) for the
 full policy. In short:
@@ -48,7 +48,7 @@ full policy. In short:
   reading another engine's source. General, widely-known techniques and
   public documentation are fine; copying or adapting someone else's code,
   tests, types or comments is not.
-- Public API names follow Kairon's own vocabulary
+- Public API names follow Scenith's own vocabulary
   ([ADR 0010](docs/decisions/0010-own-api-vocabulary.md)), never another
   engine's identifiers — see the
   [API naming policy](docs/11-legal-and-clean-room.md#api-naming-policy)
@@ -134,7 +134,7 @@ git config core.hooksPath .githooks
 
 ## Versioning (Changesets)
 
-All `@kairon-render/*` product packages (`core`, `schema`, `media`, `captions`,
+All `@scenith-render/*` product packages (`core`, `schema`, `media`, `captions`,
 `transitions`, `player`, `bundler`, `renderer`, `cli`) are versioned and
 released together, as one `fixed` [Changesets](https://github.com/changesets/changesets)
 group — see [ADR 0002](docs/decisions/0002-monorepo-tooling.md) and

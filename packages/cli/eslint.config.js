@@ -1,6 +1,6 @@
-import { kaironConfig } from "@kairon-render/eslint-config";
+import { scenithConfig } from "@scenith-render/eslint-config";
 
-export default kaironConfig({
+export default scenithConfig({
   package: "cli",
   environment: "node",
   allowedInternalDeps: ["renderer"],

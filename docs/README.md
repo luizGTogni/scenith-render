@@ -1,20 +1,20 @@
-# Kairon Render — Documentation
+# Scenith Render — Documentation
 
-This folder is the single source of truth for the design of Kairon Render.
+This folder is the single source of truth for the design of Scenith Render.
 Read the documents in order the first time; afterwards use them as reference.
 
 ## Reading order
 
 | #  | Document | What it answers |
 |----|----------|-----------------|
-| 01 | [Vision](01-vision.md) | Why does Kairon exist, who is it for, what is out of scope? |
+| 01 | [Vision](01-vision.md) | Why does Scenith exist, who is it for, what is out of scope? |
 | 02 | [Core Concepts](02-core-concepts.md) | What are compositions, frames, clips and the timeline? |
 | 03 | [Architecture](03-architecture.md) | How do the pieces fit together end to end? |
 | 04 | [Packages](04-packages.md) | How is the monorepo organized and what does each package own? |
 | 05 | [Rendering Pipeline](05-rendering-pipeline.md) | How does a composition become an MP4? |
 | 06 | [Player](06-player.md) | How is a composition previewed in the browser? |
 | 07 | [Media and Assets](07-media-and-assets.md) | How are video, audio, images and fonts handled? |
-| 08 | [Scene Schema](08-scene-schema.md) | What is the JSON scene format — Kairon's primary input? |
+| 08 | [Scene Schema](08-scene-schema.md) | What is the JSON scene format — Scenith's primary input? |
 | 09 | [API Design](09-api-design.md) | What does the public API look like? |
 | 10 | [Roadmap](10-roadmap.md) | In what order do we build things? |
 | 11 | [Legal and Clean Room](11-legal-and-clean-room.md) | How do we stay independent from Remotion? |

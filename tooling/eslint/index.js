@@ -7,12 +7,12 @@ import globals from "globals";
 import tseslint from "typescript-eslint";
 
 /**
- * Every `@kairon-render/*` package, kept in one place so each package's
+ * Every `@scenith-render/*` package, kept in one place so each package's
  * `allowedInternalDeps` can be turned into "forbid everything else" without
  * every package having to enumerate the packages it must NOT import.
  * Matches docs/04-packages.md#repository-layout.
  */
-const ALL_KAIRON_PACKAGES = [
+const ALL_SCENITH_PACKAGES = [
   "core",
   "schema",
   "media",
@@ -61,10 +61,10 @@ function restrictGlobals(names) {
 }
 
 /**
- * @param {import("./index.d.ts").KaironConfigOptions} options
+ * @param {import("./index.d.ts").ScenithConfigOptions} options
  * @returns {import("eslint").Linter.Config[]}
  */
-export function kaironConfig({
+export function scenithConfig({
   package: packageName,
   environment,
   allowedInternalDeps = [],
@@ -72,15 +72,15 @@ export function kaironConfig({
   files = ["**/*.{ts,tsx}"],
   project,
 }) {
-  const forbiddenKaironPackages = ALL_KAIRON_PACKAGES.filter(
+  const forbiddenScenithPackages = ALL_SCENITH_PACKAGES.filter(
     (name) => name !== packageName && !allowedInternalDeps.includes(name),
-  ).map((name) => `@kairon-render/${name}`);
+  ).map((name) => `@scenith-render/${name}`);
 
   /** @type {{ name: string; message: string }[]} */
-  const restrictedPaths = forbiddenKaironPackages.map((name) => ({
+  const restrictedPaths = forbiddenScenithPackages.map((name) => ({
     name,
     message:
-      `@kairon-render/${packageName} may not import ${name} ` +
+      `@scenith-render/${packageName} may not import ${name} ` +
       "(see docs/04-packages.md#dependency-graph).",
   }));
 
@@ -89,7 +89,7 @@ export function kaironConfig({
       restrictedPaths.push({
         name: specifier,
         message:
-          `@kairon-render/${packageName} runs in the browser and may not import ` +
+          `@scenith-render/${packageName} runs in the browser and may not import ` +
           `Node built-ins (got '${specifier}'); see ` +
           "docs/04-packages.md#environment-boundaries.",
       });
@@ -101,7 +101,7 @@ export function kaironConfig({
       restrictedPaths.push({
         name,
         message:
-          `@kairon-render/${packageName} is isomorphic and may not import '${name}'` +
+          `@scenith-render/${packageName} is isomorphic and may not import '${name}'` +
           " (see docs/04-packages.md#environment-boundaries).",
       });
     }
@@ -175,7 +175,7 @@ export function kaironConfig({
       ? [
           {
             // Only the two classic, stable rules-of-hooks rules. The rest of
-            // `configs.recommended` targets the React Compiler, which Kairon
+            // `configs.recommended` targets the React Compiler, which Scenith
             // does not use yet.
             files,
             plugins: { "react-hooks": reactHooks },

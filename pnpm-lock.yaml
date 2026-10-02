@@ -29,7 +29,7 @@ importers:
 
   apps/playground:
     dependencies:
-      '@kairon-render/core':
+      '@scenith-render/core':
         specifier: workspace:*
         version: link:../../packages/core
       react:
@@ -39,10 +39,10 @@ importers:
         specifier: ^19.3.0
         version: 19.3.0(react@19.3.0)
     devDependencies:
-      '@kairon-render/eslint-config':
+      '@scenith-render/eslint-config':
         specifier: workspace:*
         version: link:../../tooling/eslint
-      '@kairon-render/tsconfig':
+      '@scenith-render/tsconfig':
         specifier: workspace:*
         version: link:../../tooling/typescript
       '@types/react':
@@ -66,13 +66,13 @@ importers:
 
   packages/bundler:
     devDependencies:
-      '@kairon-render/eslint-config':
+      '@scenith-render/eslint-config':
         specifier: workspace:*
         version: link:../../tooling/eslint
-      '@kairon-render/tsconfig':
+      '@scenith-render/tsconfig':
         specifier: workspace:*
         version: link:../../tooling/typescript
-      '@kairon-render/tsup-config':
+      '@scenith-render/tsup-config':
         specifier: workspace:*
         version: link:../../tooling/tsup
       '@types/node':
@@ -93,13 +93,13 @@ importers:
 
   packages/captions:
     devDependencies:
-      '@kairon-render/eslint-config':
+      '@scenith-render/eslint-config':
         specifier: workspace:*
         version: link:../../tooling/eslint
-      '@kairon-render/tsconfig':
+      '@scenith-render/tsconfig':
         specifier: workspace:*
         version: link:../../tooling/typescript
-      '@kairon-render/tsup-config':
+      '@scenith-render/tsup-config':
         specifier: workspace:*
         version: link:../../tooling/tsup
       '@types/react':
@@ -126,13 +126,13 @@ importers:
 
   packages/cli:
     devDependencies:
-      '@kairon-render/eslint-config':
+      '@scenith-render/eslint-config':
         specifier: workspace:*
         version: link:../../tooling/eslint
-      '@kairon-render/tsconfig':
+      '@scenith-render/tsconfig':
         specifier: workspace:*
         version: link:../../tooling/typescript
-      '@kairon-render/tsup-config':
+      '@scenith-render/tsup-config':
         specifier: workspace:*
         version: link:../../tooling/tsup
       '@types/node':
@@ -153,13 +153,13 @@ importers:
 
   packages/core:
     devDependencies:
-      '@kairon-render/eslint-config':
+      '@scenith-render/eslint-config':
         specifier: workspace:*
         version: link:../../tooling/eslint
-      '@kairon-render/tsconfig':
+      '@scenith-render/tsconfig':
         specifier: workspace:*
         version: link:../../tooling/typescript
-      '@kairon-render/tsup-config':
+      '@scenith-render/tsup-config':
         specifier: workspace:*
         version: link:../../tooling/tsup
       '@types/react':
@@ -186,13 +186,13 @@ importers:
 
   packages/media:
     devDependencies:
-      '@kairon-render/eslint-config':
+      '@scenith-render/eslint-config':
         specifier: workspace:*
         version: link:../../tooling/eslint
-      '@kairon-render/tsconfig':
+      '@scenith-render/tsconfig':
         specifier: workspace:*
         version: link:../../tooling/typescript
-      '@kairon-render/tsup-config':
+      '@scenith-render/tsup-config':
         specifier: workspace:*
         version: link:../../tooling/tsup
       '@types/react':
@@ -219,13 +219,13 @@ importers:
 
   packages/player:
     devDependencies:
-      '@kairon-render/eslint-config':
+      '@scenith-render/eslint-config':
         specifier: workspace:*
         version: link:../../tooling/eslint
-      '@kairon-render/tsconfig':
+      '@scenith-render/tsconfig':
         specifier: workspace:*
         version: link:../../tooling/typescript
-      '@kairon-render/tsup-config':
+      '@scenith-render/tsup-config':
         specifier: workspace:*
         version: link:../../tooling/tsup
       '@types/react':
@@ -252,13 +252,13 @@ importers:
 
   packages/renderer:
     devDependencies:
-      '@kairon-render/eslint-config':
+      '@scenith-render/eslint-config':
         specifier: workspace:*
         version: link:../../tooling/eslint
-      '@kairon-render/tsconfig':
+      '@scenith-render/tsconfig':
         specifier: workspace:*
         version: link:../../tooling/typescript
-      '@kairon-render/tsup-config':
+      '@scenith-render/tsup-config':
         specifier: workspace:*
         version: link:../../tooling/tsup
       '@types/node':
@@ -279,13 +279,13 @@ importers:
 
   packages/schema:
     devDependencies:
-      '@kairon-render/eslint-config':
+      '@scenith-render/eslint-config':
         specifier: workspace:*
         version: link:../../tooling/eslint
-      '@kairon-render/tsconfig':
+      '@scenith-render/tsconfig':
         specifier: workspace:*
         version: link:../../tooling/typescript
-      '@kairon-render/tsup-config':
+      '@scenith-render/tsup-config':
         specifier: workspace:*
         version: link:../../tooling/tsup
       '@types/react':
@@ -312,13 +312,13 @@ importers:
 
   packages/transitions:
     devDependencies:
-      '@kairon-render/eslint-config':
+      '@scenith-render/eslint-config':
         specifier: workspace:*
         version: link:../../tooling/eslint
-      '@kairon-render/tsconfig':
+      '@scenith-render/tsconfig':
         specifier: workspace:*
         version: link:../../tooling/typescript
-      '@kairon-render/tsup-config':
+      '@scenith-render/tsup-config':
         specifier: workspace:*
         version: link:../../tooling/tsup
       '@types/react':
@@ -374,7 +374,7 @@ importers:
         specifier: ^8.5.1
         version: 8.5.1(postcss@8.5.28)(typescript@5.9.3)(yaml@2.9.1)
     devDependencies:
-      '@kairon-render/eslint-config':
+      '@scenith-render/eslint-config':
         specifier: workspace:*
         version: link:../eslint
       eslint:
@@ -383,7 +383,7 @@ importers:
 
   tooling/typescript:
     devDependencies:
-      '@kairon-render/eslint-config':
+      '@scenith-render/eslint-config':
         specifier: workspace:*
         version: link:../eslint
       eslint:

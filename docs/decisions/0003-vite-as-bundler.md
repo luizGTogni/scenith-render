@@ -6,12 +6,12 @@
 ## Context
 
 User projects must be bundled into a static site that headless Chromium can
-load, and served with hot reload in `kairon preview`.
+load, and served with hot reload in `scenith preview`.
 
 ## Decision
 
 Use Vite for both the preview dev server and project bundles. Users can
-extend the config through `vite` in `kairon.config.ts`.
+extend the config through `vite` in `scenith.config.ts`.
 
 ## Alternatives considered
 

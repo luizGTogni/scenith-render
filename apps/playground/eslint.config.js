@@ -1,9 +1,9 @@
-import { kaironConfig } from "@kairon-render/eslint-config";
+import { scenithConfig } from "@scenith-render/eslint-config";
 
 // The playground is a sandbox for exercising the engine during development
 // (see docs/04-packages.md), not a library with a constrained dependency
 // graph, so it's allowed to import any product package.
-export default kaironConfig({
+export default scenithConfig({
   package: "playground",
   environment: "browser",
   allowedInternalDeps: [

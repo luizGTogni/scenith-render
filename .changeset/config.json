@@ -4,15 +4,15 @@
   "commit": false,
   "fixed": [
     [
-      "@kairon-render/core",
-      "@kairon-render/schema",
-      "@kairon-render/media",
-      "@kairon-render/captions",
-      "@kairon-render/transitions",
-      "@kairon-render/player",
-      "@kairon-render/bundler",
-      "@kairon-render/renderer",
-      "@kairon-render/cli"
+      "@scenith-render/core",
+      "@scenith-render/schema",
+      "@scenith-render/media",
+      "@scenith-render/captions",
+      "@scenith-render/transitions",
+      "@scenith-render/player",
+      "@scenith-render/bundler",
+      "@scenith-render/renderer",
+      "@scenith-render/cli"
     ]
   ],
   "linked": [],
@@ -20,8 +20,8 @@
   "baseBranch": "main",
   "updateInternalDependencies": "patch",
   "ignore": [
-    "@kairon-render/tsconfig",
-    "@kairon-render/tsup-config",
-    "@kairon-render/eslint-config"
+    "@scenith-render/tsconfig",
+    "@scenith-render/tsup-config",
+    "@scenith-render/eslint-config"
   ]
 }

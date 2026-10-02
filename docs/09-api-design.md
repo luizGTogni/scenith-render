@@ -14,7 +14,7 @@ may change before v1.0.
 - **Frames everywhere** on the timeline (`seconds(2.5)` converts).
 - **Small surface.** Every export is documented and justified.
 
-## `@kairon-render/core`
+## `@scenith-render/core`
 
 ```ts
 // Project definition (default export of the project entry file)
@@ -63,7 +63,7 @@ random(seed: string | number): number;   // 0..1, deterministic
 seconds(s: number): number;               // frames at the current fps
 ```
 
-## `@kairon-render/media`
+## `@scenith-render/media`
 
 ```ts
 <Video src trimStart? trimEnd? volume? speed? muted? loop? fit? />
@@ -77,7 +77,7 @@ preload(src: string): { ready: Promise<void>; release(): void };
 probeMedia(src: string): Promise<{ duration: number; width?; height?; fps?; hasVideo; hasAudio }>;
 ```
 
-## `@kairon-render/captions`
+## `@scenith-render/captions`
 
 ```ts
 <Captions words preset? style? grouping? position? pageTransition? />
@@ -90,7 +90,7 @@ cuesToWords(cues: Cue[]): Word[];
 
 See [12 — Captions](12-captions.md).
 
-## `@kairon-render/transitions`
+## `@scenith-render/transitions`
 
 ```ts
 fade({ duration }) · slide({ duration, direction }) · wipe({ duration, direction }) · zoom({ duration })
@@ -100,12 +100,12 @@ defineTransition({ name, props, render })
 fade({ duration: 15 })  // → { type: "fade", duration: 15 }
 ```
 
-## `@kairon-render/schema`
+## `@scenith-render/schema`
 
 See [08 — Scene Schema](08-scene-schema.md#api). Root entry is
-environment-agnostic; `@kairon-render/schema/react` exports `SceneView`.
+environment-agnostic; `@scenith-render/schema/react` exports `SceneView`.
 
-## `@kairon-render/player`
+## `@scenith-render/player`
 
 ```ts
 <Player
@@ -119,7 +119,7 @@ environment-agnostic; `@kairon-render/schema/react` exports `SceneView`.
 <FrameView scene | composition frame />
 ```
 
-## `@kairon-render/renderer` (Node)
+## `@scenith-render/renderer` (Node)
 
 ```ts
 buildProject({ entry, outDir?, onProgress? }): Promise<ProjectBuild>;
@@ -153,32 +153,32 @@ interface ChunkStore {                    // plug in S3, Redis, etc.
 }
 ```
 
-## `@kairon-render/cli`
+## `@scenith-render/cli`
 
 ```bash
-kairon render <scene.json | composition-id> <output>   # render a video
-kairon image  <scene.json | composition-id> <output> --frame=30
-kairon validate <scene.json>                           # validate, print errors with paths
-kairon schema [--out=scene.schema.json]                # print JSON Schema (incl. custom clip types)
-kairon list                                            # list project compositions
-kairon preview [entry]                                 # local preview app
-kairon benchmark <scene.json | composition-id>         # compare concurrency settings
+scenith render <scene.json | composition-id> <output>   # render a video
+scenith image  <scene.json | composition-id> <output> --frame=30
+scenith validate <scene.json>                           # validate, print errors with paths
+scenith schema [--out=scene.schema.json]                # print JSON Schema (incl. custom clip types)
+scenith list                                            # list project compositions
+scenith preview [entry]                                 # local preview app
+scenith benchmark <scene.json | composition-id>         # compare concurrency settings
 
 # common options
 --props=./props.json  --codec=h264  --crf=18  --concurrency=8  --frames=0-299
 --scale=2  --loudness=streaming  --no-cache  --log=verbose
 ```
 
-## `kairon.config.ts`
+## `scenith.config.ts`
 
 ```ts
-import { defineConfig } from "@kairon-render/cli";
+import { defineConfig } from "@scenith-render/cli";
 
 export default defineConfig({
   entry: "src/index.ts",
   publicDir: "public",
   render: { codec: "h264", quality: { crf: 18 }, concurrency: "50%", audio: { loudness: "streaming" } },
-  cache: { dir: ".kairon/cache", maxSizeMb: 5000 },
+  cache: { dir: ".scenith/cache", maxSizeMb: 5000 },
   vite: (config) => config,                    // escape hatch for project bundles
 });
 ```
@@ -186,8 +186,8 @@ export default defineConfig({
 ## Errors
 
 ```ts
-class KaironError extends Error {
-  code: `KAIRON_E_${string}`;   // e.g. KAIRON_E_HOLD_TIMEOUT
+class ScenithError extends Error {
+  code: `SCENITH_E_${string}`;   // e.g. SCENITH_E_HOLD_TIMEOUT
   hint?: string;               // how to fix it
   frame?: number;              // frame where it happened
   path?: string;               // scene path, e.g. "tracks[1].clips[3]"

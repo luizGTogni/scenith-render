@@ -7,8 +7,8 @@
 //
 // Scope is production dependencies only (`pnpm licenses list --prod`):
 // devDependencies (build/lint/test tooling) never ship in a published
-// `@kairon-render/*` package, so their licenses don't create distribution
-// obligations for Kairon's own code.
+// `@scenith-render/*` package, so their licenses don't create distribution
+// obligations for Scenith's own code.
 
 import { execFileSync } from "node:child_process";
 import { readFileSync } from "node:fs";

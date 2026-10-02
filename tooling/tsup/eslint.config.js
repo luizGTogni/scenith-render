@@ -1,6 +1,6 @@
-import { kaironConfig } from "@kairon-render/eslint-config";
+import { scenithConfig } from "@scenith-render/eslint-config";
 
-export default kaironConfig({
+export default scenithConfig({
   package: "tsup-config",
   environment: "node",
   tsconfigRootDir: import.meta.dirname,

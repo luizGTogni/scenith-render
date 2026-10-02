@@ -8,19 +8,19 @@
 
 The renderer depends on FFmpeg (ADR 0004). FFmpeg builds that include the
 best encoders (`libx264`, `libx265`) are GPL. Distributing those binaries
-inside an MIT package would bring GPL obligations into Kairon releases.
+inside an MIT package would bring GPL obligations into Scenith releases.
 
 GPL obligations apply to whoever **distributes** the binaries. Invoking a
-separate program through its command line does not make Kairon a derivative
+separate program through its command line does not make Scenith a derivative
 work of it.
 
 ## Decision
 
-- Kairon packages never include or depend on FFmpeg binaries.
+- Scenith packages never include or depend on FFmpeg binaries.
 - The renderer runs `ffmpeg` and `ffprobe` as separate processes only.
 - Resolution order: `ffmpegPath` / `ffprobePath` options →
-  `KAIRON_FFMPEG_PATH` / `KAIRON_FFPROBE_PATH` env vars → system `PATH`.
-- If not found, fail with `KAIRON_E_FFMPEG_NOT_FOUND` and per-OS install
+  `SCENITH_FFMPEG_PATH` / `SCENITH_FFPROBE_PATH` env vars → system `PATH`.
+- If not found, fail with `SCENITH_E_FFMPEG_NOT_FOUND` and per-OS install
   instructions.
 - On startup the renderer reads `ffmpeg -version` / `-encoders` to check the
   minimum version and which encoders exist, and reports a clear error when a
@@ -39,7 +39,7 @@ work of it.
 
 ## Consequences
 
-- + Kairon stays 100 % MIT; no license obligations for us.
+- + Scenith stays 100 % MIT; no license obligations for us.
 - + Users choose and update their own FFmpeg (security fixes, GPU encoders).
 - − One extra install step; mitigated by clear errors and docs.
 - − Behavior can vary between FFmpeg versions; we define a minimum version

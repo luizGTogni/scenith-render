@@ -1,8 +1,8 @@
 import { describe, expect, it } from "vitest";
 import { placeholder } from "./index.js";
 
-describe("@kairon-render/cli", () => {
+describe("@scenith-render/cli", () => {
   it("includes the package name", () => {
-    expect(placeholder()).toContain("@kairon-render/cli");
+    expect(placeholder()).toContain("@scenith-render/cli");
   });
 });

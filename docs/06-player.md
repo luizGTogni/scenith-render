@@ -1,15 +1,15 @@
 # 06 — Player
 
-`@kairon-render/player` previews a scene or a composition in any React app, in
+`@scenith-render/player` previews a scene or a composition in any React app, in
 real time, without rendering a file. It is the heart of any editor built on
-Kairon.
+Scenith.
 
 ## Usage
 
 ### Scene mode (main use)
 
 ```tsx
-import { Player, type PlayerRef } from "@kairon-render/player";
+import { Player, type PlayerRef } from "@scenith-render/player";
 
 const ref = useRef<PlayerRef>(null);
 

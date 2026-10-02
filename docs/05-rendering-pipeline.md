@@ -1,6 +1,6 @@
 # 05 — Rendering Pipeline
 
-How `kairon render scene.json out.mp4` turns a scene into a video file.
+How `scenith render scene.json out.mp4` turns a scene into a video file.
 
 ## Overview
 
@@ -21,19 +21,19 @@ How `kairon render scene.json out.mp4` turns a scene into a video file.
 
 - Input is either a scene (`{ scene, build? }`) or a composition of a
   project (`{ build, composition, props }`).
-- Scenes are validated and normalized **in Node** with `@kairon-render/schema`
+- Scenes are validated and normalized **in Node** with `@scenith-render/schema`
   before any browser starts, so invalid input fails fast with scene paths.
 
 ## 2–3. Runtime and serving
 
 - Scenes that only use built-in clip types use the **standard runtime**
-  shipped inside `@kairon-render/renderer`. No build step.
+  shipped inside `@scenith-render/renderer`. No build step.
 - Projects with custom clip types or code compositions are built by
-  `@kairon-render/bundler` into a project bundle, cached by content hash.
+  `@scenith-render/bundler` into a project bundle, cached by content hash.
 - A local HTTP server (random free port) serves:
   - the runtime (`/`),
   - public assets (`/public/*`),
-  - the **media frame server** (`/__kairon/media/*`), see [07](07-media-and-assets.md).
+  - the **media frame server** (`/__scenith/media/*`), see [07](07-media-and-assets.md).
 
 ## 4. Browser pool
 
@@ -48,7 +48,7 @@ How `kairon render scene.json out.mp4` turns a scene into a video file.
 ## 5. Load
 
 ```ts
-await page.evaluate((src) => __KAIRON__.load(src), source);
+await page.evaluate((src) => __SCENITH__.load(src), source);
 ```
 
 For code compositions: validate props against `propsSchema`, run
@@ -75,7 +75,7 @@ of frames, e.g. 60 at 30 fps):
 
 ```ts
 for (let f = chunk.start; f <= chunk.end; f++) {
-  await page.evaluate((f) => __KAIRON__.seek(f), f); // render + wait for holds
+  await page.evaluate((f) => __SCENITH__.seek(f), f); // render + wait for holds
   const image = await captureFrame(page);            // JPEG or PNG buffer
   encoder.write(image);                              // FFmpeg stdin
 }
@@ -174,4 +174,4 @@ Used for thumbnails and posters.
 Chunks are already independent units with stable keys, so they can run on
 different machines: a coordinator plans the grid, workers run
 `renderChunk()` and upload segments, the coordinator assembles. This lives
-in a future `@kairon-render/cloud` package.
+in a future `@scenith-render/cloud` package.

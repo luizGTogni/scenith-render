@@ -5,14 +5,14 @@
 
 ## Context
 
-The clean-room policy ([11](../11-legal-and-clean-room.md)) says Kairon is
+The clean-room policy ([11](../11-legal-and-clean-room.md)) says Scenith is
 not a clone of other engines, but the first API draft reused many of
 Remotion's identifiers and signatures. That contradiction weakens the
-clean-room position and makes Kairon look like a copy.
+clean-room position and makes Scenith look like a copy.
 
 ## Decision
 
-Kairon's API is derived from its own model — scenes, tracks, clips,
+Scenith's API is derived from its own model — scenes, tracks, clips,
 keyframes — and names in code match names in the scene JSON.
 
 - Generic industry vocabulary is allowed: composition, clip, track, layer,

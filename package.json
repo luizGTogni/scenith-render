@@ -1,7 +1,7 @@
 {
-  "name": "kairon-render",
+  "name": "scenith-render",
   "private": true,
-  "description": "Kairon Render — scene-first, React-powered video rendering engine.",
+  "description": "Scenith Render — scene-first, React-powered video rendering engine.",
   "license": "MIT",
   "type": "module",
   "engines": {

@@ -1,9 +1,9 @@
-import { kaironConfig } from "@kairon-render/eslint-config";
+import { scenithConfig } from "@scenith-render/eslint-config";
 
 const allowedInternalDeps = ["core", "media", "captions", "transitions"];
 
 export default [
-  ...kaironConfig({
+  ...scenithConfig({
     package: "schema",
     environment: "isomorphic",
     allowedInternalDeps,
@@ -11,7 +11,7 @@ export default [
     files: ["src/index.ts", "src/index.test.ts"],
     project: ["tsconfig.json"],
   }),
-  ...kaironConfig({
+  ...scenithConfig({
     package: "schema",
     environment: "browser",
     allowedInternalDeps,

@@ -2,7 +2,7 @@
 
 Media is the hardest part of a frame-based engine. Browsers are built to
 *play* media in real time, not to show an exact frame on demand. This
-document explains how Kairon gets frame-accurate media in both the player
+document explains how Scenith gets frame-accurate media in both the player
 and the renderer.
 
 ## Components
@@ -43,7 +43,7 @@ renderer `<Video>` does not use a `<video>` element. Instead:
 <Video> at clip frame f
    │  source time t = (trimStart + f * speed) / fps
    ▼
-<img src="/__kairon/media/frame?src=...&t=...">      (hold until loaded)
+<img src="/__scenith/media/frame?src=...&t=...">      (hold until loaded)
    ▲
    │  local HTTP
 Media frame server (Node)
@@ -75,7 +75,7 @@ interface AssetUsage {
 }
 ```
 
-The renderer reads this through `__KAIRON__.collectAssets()`. A volume
+The renderer reads this through `__SCENITH__.collectAssets()`. A volume
 function makes fades:
 
 ```tsx
@@ -100,10 +100,10 @@ fingerprint**:
 
 | Cache | Location | Key |
 |-------|----------|-----|
-| Project bundles | `.kairon/cache/bundles` | Source content hash |
-| Remote downloads | `.kairon/cache/media` | URL + ETag |
+| Project bundles | `.scenith/cache/bundles` | Source content hash |
+| Remote downloads | `.scenith/cache/media` | URL + ETag |
 | Decoded frames | Memory (LRU) | Source + time |
-| Rendered chunks | `.kairon/cache/chunks` | Chunk key |
+| Rendered chunks | `.scenith/cache/chunks` | Chunk key |
 
 ## Supported inputs (v1.0)
 

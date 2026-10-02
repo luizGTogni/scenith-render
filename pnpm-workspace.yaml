@@ -7,7 +7,7 @@ packages:
 allowBuilds:
   esbuild: true
 # Transitive dependency of vitest (via @vitest/mocker), not something we
-# depend on directly — @kairon-render/playground pins its own vite to 8.3.1.
+# depend on directly — @scenith-render/playground pins its own vite to 8.3.1.
 # Legitimate use of this exclude, unlike pinning our own deps to dodge it.
 minimumReleaseAgeExclude:
   - vite@8.3.2

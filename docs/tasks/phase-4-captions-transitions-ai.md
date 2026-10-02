@@ -1,6 +1,6 @@
 # Phase 4 — Captions, transitions and AI tooling
 
-**Goal:** the features that make Kairon useful to an AI-driven editor.
+**Goal:** the features that make Scenith useful to an AI-driven editor.
 
 **Exit criteria:** word highlights stay within ±1 frame of the given
 timings; an LLM, given only `toJsonSchema()` and `describeRegistry()`,
@@ -11,7 +11,7 @@ patches.
 |----|-------|------|------|------------|--------|
 | **Decisions** |||||
 | P4-01 | ADR: transition model and crossfade rules | adr | S | — | todo |
-| **Data model** — `@kairon-render/schema` |||||
+| **Data model** — `@scenith-render/schema` |||||
 | P4-02 | Transitions in the schema and visible ranges | feat | M | P4-01, P1-06 | todo |
 | P4-03 | `captions` clip schema and word validation | feat | S | P1-07 | todo |
 | P4-04 | `applyPatch` with `@id` paths | feat | M | P1-05 | todo |
@@ -26,7 +26,7 @@ patches.
 | P4-12 | SRT/VTT import and `cuesToWords` | feat | S | P4-03 | todo |
 | P4-13 | `captions` clip type | feat | S | P4-11 | todo |
 | **Interface** |||||
-| P4-14 | `kairon schema` | feat | S | P4-06, P2-16 | todo |
+| P4-14 | `scenith schema` | feat | S | P4-06, P2-16 | todo |
 | **Verification** |||||
 | P4-15 | Caption timing accuracy test | test | S | P4-13 | todo |
 | P4-16 | LLM evaluation harness | test | M | P4-04, P4-06 | todo |
@@ -48,7 +48,7 @@ patches.
 - **Type:** feat · **Package:** schema · **Size:** S
 - **Depends on:** P1-07
 - **Refs:** [12 — input](../12-captions.md#input-word-timings)
-- **Done when:** [ ] words `{ text, start, end, emphasis?, estimated? }` in ms; [ ] sorted, `start < end`, `KAIRON_E_CAPTION_OVERLAP`; [ ] out-of-range words produce warnings.
+- **Done when:** [ ] words `{ text, start, end, emphasis?, estimated? }` in ms; [ ] sorted, `start < end`, `SCENITH_E_CAPTION_OVERLAP`; [ ] out-of-range words produce warnings.
 
 ### P4-04 · `applyPatch` with `@id` paths
 - **Type:** feat · **Package:** schema · **Size:** M
@@ -102,7 +102,7 @@ patches.
 - **Depends on:** P4-11
 - **Done when:** [ ] built-in registered; [ ] ms → frame conversion as in [12](../12-captions.md#input-word-timings).
 
-### P4-14 · `kairon schema`
+### P4-14 · `scenith schema`
 - **Type:** feat · **Package:** cli · **Size:** S
 - **Depends on:** P4-06, P2-16
 - **Done when:** [ ] prints or writes the JSON Schema (`--out`).

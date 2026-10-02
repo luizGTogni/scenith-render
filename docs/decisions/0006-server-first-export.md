@@ -12,7 +12,7 @@ in a reliable, deterministic way.
 ## Decision
 
 v1.0 exports only on the server (headless Chromium + FFmpeg). The browser is
-used for preview via `@kairon-render/player`. Client-side export with WebCodecs is
+used for preview via `@scenith-render/player`. Client-side export with WebCodecs is
 a later phase, limited to compositions that draw to canvas.
 
 ## Alternatives considered

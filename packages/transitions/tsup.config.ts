@@ -1,4 +1,4 @@
 import { defineConfig } from "tsup";
-import { kaironPreset } from "@kairon-render/tsup-config";
+import { scenithPreset } from "@scenith-render/tsup-config";
 
-export default defineConfig(kaironPreset());
+export default defineConfig(scenithPreset());

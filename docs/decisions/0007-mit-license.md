@@ -5,12 +5,12 @@
 
 ## Context
 
-Kairon Render is not meant to generate revenue. The goal is a fully owned,
-freely usable engine that the Kairon editor and anyone else can build on.
+Scenith Render is not meant to generate revenue. The goal is a fully owned,
+freely usable engine that the Scenith editor and anyone else can build on.
 
 ## Decision
 
-Release all Kairon Render packages under the MIT License. Only dependencies
+Release all Scenith Render packages under the MIT License. Only dependencies
 with MIT-compatible licenses (MIT, ISC, BSD, Apache-2.0, 0BSD) are allowed;
 CI enforces this with a license checker.
 
@@ -25,6 +25,6 @@ CI enforces this with a license checker.
 ## Consequences
 
 - + Maximum adoption, simple for users and contributors.
-- + No license friction for the Kairon editor or any other product.
+- + No license friction for the Scenith editor or any other product.
 - − Anyone, including competitors, can use or fork it commercially. Accepted.
 - − We must never bundle GPL components (see [0008](0008-ffmpeg-not-bundled.md)).

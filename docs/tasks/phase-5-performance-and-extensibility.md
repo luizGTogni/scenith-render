@@ -21,7 +21,7 @@ chunks; a custom clip type works in a scene in player and render.
 | P5-08 | GIF and PNG sequence | feat | M | P2-12 | todo |
 | P5-09 | Opt-in hardware encoders | feat | M | P2-08 | todo |
 | **Extensibility** |||||
-| P5-10 | `@kairon-render/bundler`: project bundles | feat | L | P2-09 | todo |
+| P5-10 | `@scenith-render/bundler`: project bundles | feat | L | P2-09 | todo |
 | P5-11 | Custom clip types end to end | feat | M | P5-10, P1-07 | todo |
 | P5-12 | `cacheable: false` clip types | feat | S | P5-03, P5-11 | todo |
 | P5-13 | Code-based compositions and `resolve` | feat | M | P5-10 | todo |
@@ -29,9 +29,9 @@ chunks; a custom clip type works in a scene in player and render.
 | P5-15 | Player composition mode | feat | S | P5-13 | todo |
 | P5-16 | Dev-mode determinism warnings | feat | S | P1-14 | todo |
 | **Interface** |||||
-| P5-17 | `kairon benchmark` | feat | S | P5-02 | todo |
-| P5-18 | `kairon preview` app | feat | L | P5-10, P5-15 | todo |
-| P5-19 | `kairon list` | feat | S | P5-13 | todo |
+| P5-17 | `scenith benchmark` | feat | S | P5-02 | todo |
+| P5-18 | `scenith preview` app | feat | L | P5-10, P5-15 | todo |
+| P5-19 | `scenith list` | feat | S | P5-13 | todo |
 | **Verification** |||||
 | P5-20 | Benchmark suite and performance gate | test | M | P5-02 | todo |
 | P5-21 | Incremental export test | test | S | P5-05 | todo |
@@ -86,7 +86,7 @@ chunks; a custom clip type works in a scene in player and render.
 - **Depends on:** P2-08
 - **Done when:** [ ] `hardwareAcceleration: "auto"` picks NVENC/VideoToolbox/VAAPI when present; [ ] falls back to software with a warning.
 
-### P5-10 · `@kairon-render/bundler`: project bundles
+### P5-10 · `@scenith-render/bundler`: project bundles
 - **Type:** feat · **Package:** bundler · **Size:** L
 - **Depends on:** P2-09
 - **Refs:** [ADR 0003](../decisions/0003-vite-as-bundler.md), [03 — runtime bundles](../03-architecture.md#runtime-bundles)
@@ -123,17 +123,17 @@ chunks; a custom clip type works in a scene in player and render.
 - **Depends on:** P1-14
 - **Done when:** [ ] dev builds warn on `Math.random`, `Date.now` and CSS animations inside clips; [ ] stripped from production builds.
 
-### P5-17 · `kairon benchmark`
+### P5-17 · `scenith benchmark`
 - **Type:** feat · **Package:** cli · **Size:** S
 - **Depends on:** P5-02
 - **Done when:** [ ] tries several concurrency values and recommends one.
 
-### P5-18 · `kairon preview` app
+### P5-18 · `scenith preview` app
 - **Type:** feat · **Package:** `apps/preview`, cli · **Size:** L
 - **Depends on:** P5-10, P5-15
 - **Done when:** [ ] lists compositions and scene files; [ ] hot reload on file change; [ ] props panel generated from `propsSchema`.
 
-### P5-19 · `kairon list`
+### P5-19 · `scenith list`
 - **Type:** feat · **Package:** cli · **Size:** S
 - **Depends on:** P5-13
 - **Done when:** [ ] lists project compositions with their settings.

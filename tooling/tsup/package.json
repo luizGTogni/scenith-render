@@ -1,5 +1,5 @@
 {
-  "name": "@kairon-render/tsup-config",
+  "name": "@scenith-render/tsup-config",
   "version": "0.0.0",
   "private": true,
   "license": "MIT",
@@ -17,7 +17,7 @@
     "lint": "eslint ."
   },
   "devDependencies": {
-    "@kairon-render/eslint-config": "workspace:*",
+    "@scenith-render/eslint-config": "workspace:*",
     "eslint": "^10.11.0"
   }
 }
