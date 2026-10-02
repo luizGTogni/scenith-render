@@ -17,7 +17,7 @@ forbidden imports; license check blocks non-allowed dependencies.
 | P0-07 | Changesets with fixed versioning | infra | S | P0-04 | done |
 | P0-08 | Dependency license check | infra | S | P0-01 | done |
 | P0-09 | CI workflow | infra | M | P0-02, P0-05, P0-06, P0-08 | done |
-| P0-10 | Playground app | infra | S | P0-04 | todo |
+| P0-10 | Playground app | infra | S | P0-04 | done |
 | P0-11 | CONTRIBUTING and PR template | docs | S | — | todo |
 | P0-12 | Reserve npm scope and check trademark | infra | S | — | todo |
 | P0-13 | ADR: error model and shared isomorphic code | adr | S | — | todo |
@@ -232,7 +232,37 @@ forbidden imports; license check blocks non-allowed dependencies.
 - **Depends on:** P0-04
 - **Refs:** [ADR 0003](../decisions/0003-vite-as-bundler.md)
 - **Done when:**
-  - [ ] Vite + React 19 app that imports workspace packages with hot reload.
+  - [x] Vite + React 19 app that imports workspace packages with hot
+    reload — [apps/playground](../../apps/playground) (`@kairon/playground`,
+    private). `pnpm --filter @kairon/playground dev` starts Vite; `src/App.tsx`
+    imports and renders `@kairon/core`'s placeholder, proving a real
+    cross-package import resolves (not a copy-pasted value). ESLint
+    environment is `"browser"` with `allowedInternalDeps` listing all 9
+    product packages, since a sandbox isn't meant to have a constrained
+    dependency graph like a library does.
+  - Verified for real, not just configured: started the dev server, `curl`
+    confirmed React Fast Refresh is injected and TSX is transpiled; editing
+    `App.tsx` live-updated the served module immediately (own-source hot
+    reload). `pnpm build` produces a working production bundle.
+  - **Real nuance found and worth recording:** editing `@kairon/core`'s
+    `src/index.tsx` alone does **not** update the playground. `exports` in
+    every package points at `dist/`, so Vite resolves and serves the *built*
+    output (`/@fs/.../packages/core/dist/index.js`) — confirmed by reading
+    what it actually served. Running `pnpm --filter @kairon/core build`
+    updates the content Vite serves immediately (no dev-server restart
+    needed), so the real inner loop today is **edit → build → see it**, not
+    continuous live cross-package reload — no package has a `tsup --watch`
+    "dev" script yet for that. Good enough for Phase 0; worth a `dev` script
+    per package once there's enough real code to make the extra step
+    annoying (not filed as a new task — small enough to fold into whichever
+    phase feels the pain first).
+  - Pinned `vite` to `8.3.1` (not the `8.3.2` that `pnpm add` picked) since
+    it was too recently published for pnpm's supply-chain policy — same
+    situation as `globals` in P0-05. This time a *second*, legitimately
+    unavoidable instance of `vite@8.3.2` remained, pulled in transitively by
+    `vitest` itself (`@vitest/mocker`) — confirmed with `pnpm why vite`. Kept
+    that one `minimumReleaseAgeExclude` entry, with a comment explaining why
+    it's a real exception rather than one we engineered around.
 
 ### P0-11 · CONTRIBUTING and PR template
 - **Type:** docs · **Package:** root · **Size:** S

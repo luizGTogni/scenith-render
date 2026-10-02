@@ -1,0 +1,7 @@
+{
+  "extends": "../../tooling/typescript/browser.json",
+  "compilerOptions": {
+    "noEmit": true
+  },
+  "include": ["src"]
+}
