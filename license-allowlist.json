@@ -1,0 +1,15 @@
+{
+  "$comment": "Exceptions to the allowed-license list in scripts/check-licenses.mjs (see docs/decisions/0007-mit-license.md and docs/11-legal-and-clean-room.md). Every entry needs a reason; `license` is cross-checked against what is actually installed, so a stale entry (wrong license, or the dependency no longer pulling it in) fails loudly instead of silently staying allowed.",
+  "exceptions": [
+    {
+      "package": "minimatch",
+      "license": "BlueOak-1.0.0",
+      "reason": "Transitive dependency (glob matching, used by build/lint tooling). The Blue Oak Model License 1.0.0 is a modern permissive license with no copyleft or redistribution obligations; listed 'Recommended' by the Blue Oak Council. https://blueoakcouncil.org/license/1.0.0"
+    },
+    {
+      "package": "caniuse-lite",
+      "license": "CC-BY-4.0",
+      "reason": "Transitive dependency of Browserslist (browser compatibility DATA, not executable code). CC-BY-4.0 only requires attribution, satisfied by keeping the package's own license file intact. Extremely common across the JS ecosystem — nearly every project using Browserslist carries this exact dependency."
+    }
+  ]
+}

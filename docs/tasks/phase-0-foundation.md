@@ -15,7 +15,7 @@ forbidden imports; license check blocks non-allowed dependencies.
 | P0-05 | Lint, format and environment-boundary rules | infra | M | P0-03, P0-04 | done |
 | P0-06 | Vitest setup | infra | S | P0-03 | done |
 | P0-07 | Changesets with fixed versioning | infra | S | P0-04 | done |
-| P0-08 | Dependency license check | infra | S | P0-01 | todo |
+| P0-08 | Dependency license check | infra | S | P0-01 | done |
 | P0-09 | CI workflow | infra | M | P0-02, P0-05, P0-06, P0-08 | todo |
 | P0-10 | Playground app | infra | S | P0-04 | todo |
 | P0-11 | CONTRIBUTING and PR template | docs | S | — | todo |
@@ -166,8 +166,29 @@ forbidden imports; license check blocks non-allowed dependencies.
 - **Depends on:** P0-01
 - **Refs:** [ADR 0007](../decisions/0007-mit-license.md), [11](../11-legal-and-clean-room.md)
 - **Done when:**
-  - [ ] Script fails when any production dependency has a license outside MIT, ISC, BSD-2/3, Apache-2.0, 0BSD.
-  - [ ] Exceptions require an entry in an allowlist file with a reason.
+  - [x] Script fails when any production dependency has a license outside
+    MIT, ISC, BSD-2/3, Apache-2.0, 0BSD —
+    [scripts/check-licenses.mjs](../../scripts/check-licenses.mjs) (`pnpm
+    check-licenses`) runs `pnpm licenses list --prod --json` (no extra
+    dependency needed) and checks every reported license. Scope is
+    production dependencies only, workspace-wide (including `tooling/*`'s
+    own real dependencies, e.g. `@kairon/eslint-config`'s) — devDependencies
+    never ship in a published `@kairon/*` package, so they're out of scope.
+  - [x] Exceptions require an entry in an allowlist file with a reason —
+    [license-allowlist.json](../../license-allowlist.json). Each entry's
+    declared `license` is cross-checked against what is actually installed,
+    so a stale entry (dependency removed, or its license changed) fails as
+    an "unused exception" instead of silently staying valid.
+  - Verified with a throwaway script against three scenarios (not committed):
+    a genuinely unused/stale exception, real violations with no exceptions,
+    and an exception with the wrong `license` recorded (correctly reported
+    as both a new violation *and* a stale exception). All three failed with
+    exit 1 and a clear message; the real allowlist passes with exit 0.
+  - Two real, legitimate exceptions found scanning the current dependency
+    tree and documented in the allowlist: `minimatch` (BlueOak-1.0.0, a
+    modern permissive license) and `caniuse-lite` (CC-BY-4.0, browser
+    compatibility *data*, not code, pulled in by Browserslist — attribution
+    only, satisfied by keeping the package's license file intact).
 
 ### P0-09 · CI workflow
 - **Type:** infra · **Package:** `.github/` · **Size:** M
