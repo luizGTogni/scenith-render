@@ -12,6 +12,7 @@
       "outputs": []
     },
     "lint": {
+      "dependsOn": ["^build"],
       "inputs": ["src/**", "package.json", ".eslintrc*", "eslint.config.*"],
       "outputs": []
     },

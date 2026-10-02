@@ -263,6 +263,22 @@ forbidden imports; license check blocks non-allowed dependencies.
     `vitest` itself (`@vitest/mocker`) — confirmed with `pnpm why vite`. Kept
     that one `minimumReleaseAgeExclude` entry, with a comment explaining why
     it's a real exception rather than one we engineered around.
+  - **A real, repo-wide bug found via CI, not locally.** The pipeline passed
+    on this machine but `@kairon/playground`'s lint failed on GitHub Actions
+    with `@typescript-eslint/no-unsafe-call` on `corePlaceholder()`. Cause:
+    `turbo.json`'s `lint` task had no `dependsOn`, so on a genuinely fresh
+    checkout (`dist/` is gitignored, never committed) nothing built
+    `@kairon/core` before linting its *consumer* — type-aware linting
+    couldn't resolve `@kairon/core`'s types (its `exports` point at
+    `dist/*.d.ts`), so the import fell back to `any`. It passed locally only
+    because `dist/` already existed from manual testing earlier in this
+    session, masking the bug. This wasn't playground-specific: the same
+    failure will hit any product package the moment it imports another one
+    (Phase 1 onward, per the dependency graph in
+    [04](../04-packages.md#dependency-graph)). Fixed by adding
+    `"dependsOn": ["^build"]` to the `lint` task, matching `typecheck`/`test`
+    — verified by wiping every `dist/` and `.turbo` and re-running `pnpm
+    lint` alone: Turbo now builds `@kairon/core` first, automatically.
 
 ### P0-11 · CONTRIBUTING and PR template
 - **Type:** docs · **Package:** root · **Size:** S
