@@ -18,7 +18,7 @@ forbidden imports; license check blocks non-allowed dependencies.
 | P0-08 | Dependency license check | infra | S | P0-01 | done |
 | P0-09 | CI workflow | infra | M | P0-02, P0-05, P0-06, P0-08 | done |
 | P0-10 | Playground app | infra | S | P0-04 | done |
-| P0-11 | CONTRIBUTING and PR template | docs | S | — | todo |
+| P0-11 | CONTRIBUTING and PR template | docs | S | — | done |
 | P0-12 | Reserve npm scope and check trademark | infra | S | — | todo |
 | P0-13 | ADR: error model and shared isomorphic code | adr | S | — | todo |
 
@@ -285,8 +285,24 @@ forbidden imports; license check blocks non-allowed dependencies.
 - **Depends on:** —
 - **Refs:** [11](../11-legal-and-clean-room.md), [ADR 0010](../decisions/0010-own-api-vocabulary.md)
 - **Done when:**
-  - [ ] CONTRIBUTING explains setup, clean-room rules, naming policy, changesets (commit style already there).
-  - [ ] PR template has: sources used (provenance), naming check, docs updated, tests added.
+  - [x] CONTRIBUTING explains setup, clean-room rules, naming policy,
+    changesets (commit style already there) —
+    [CONTRIBUTING.md](../../CONTRIBUTING.md): new "Setup" (prerequisites,
+    common commands, FFmpeg note), "Clean room and naming" (summarizes
+    [doc 11](../11-legal-and-clean-room.md) and
+    [ADR 0010](../decisions/0010-own-api-vocabulary.md)) and "Pull requests"
+    sections, ahead of the existing commit-message and versioning sections.
+  - [x] PR template has: sources used (provenance), naming check, docs
+    updated, tests added —
+    [.github/PULL_REQUEST_TEMPLATE.md](../../.github/PULL_REQUEST_TEMPLATE.md),
+    reusing the exact
+    [Definition of Done](README.md#definition-of-done-every-task) checklist
+    every task is already held to, instead of inventing a second, separately
+    maintained list that could drift from it.
+  - Checked every new relative link and `#anchor` by grepping the target
+    files' real headings (`docs/tasks/README.md#definition-of-done-every-task`,
+    `docs/11-legal-and-clean-room.md#api-naming-policy`,
+    `CONTRIBUTING.md#versioning-changesets`): all resolve.
 
 ### P0-12 · Reserve npm scope and check trademark
 - **Type:** infra · **Package:** — · **Size:** S

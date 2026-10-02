@@ -1,8 +1,71 @@
 # Contributing
 
-> Setup, clean-room rules and the PR template are added in task
-> [P0-11](docs/tasks/phase-0-foundation.md). This file starts with the
-> commit convention.
+## Setup
+
+Prerequisites: Node.js (version pinned in [`.nvmrc`](.nvmrc)) and pnpm
+(version pinned in `package.json`'s `packageManager`; `corepack enable`
+picks it up automatically, or install it yourself to match).
+
+```bash
+git clone git@github.com:luizGTogni/kairon-render.git
+cd kairon-render
+pnpm install   # also runs `prepare`, which enables the commit-msg hook
+```
+
+Common commands, all runnable from the repo root (each goes through
+Turborepo, scoped to the packages it touches, with caching — see
+[docs/tasks/README.md](docs/tasks/README.md)):
+
+| Command | Does |
+|---------|------|
+| `pnpm build` | Build every package. |
+| `pnpm typecheck` | Type-check every package. |
+| `pnpm lint` | Lint every package (ESLint + the environment-boundary rules). |
+| `pnpm test` | Run unit tests. |
+| `pnpm test:coverage` | One instrumented run across the whole workspace, with a coverage report. |
+| `pnpm format` / `format:check` | Prettier, write or check only. |
+| `pnpm check-licenses` | Fail if a production dependency's license isn't allow-listed. |
+| `pnpm changeset` | Record a change for the next release (see [Versioning](#versioning-changesets)). |
+
+Scope any command to one package with `--filter`, e.g.
+`pnpm --filter @kairon/core test`. To try the engine interactively,
+`pnpm --filter @kairon/playground dev` starts the sandbox app
+(see [apps/playground](apps/playground/README.md)).
+
+FFmpeg is not needed yet for Phase 0/1 work. It becomes a prerequisite once
+rendering work starts (Phase 2+) — see
+[ADR 0008](docs/decisions/0008-ffmpeg-not-bundled.md) for why Kairon never
+bundles it and how it's located.
+
+## Clean room and naming
+
+Kairon is built as an **independent implementation**, not derived from
+Remotion or any other restricted-license codebase — see
+[docs/11-legal-and-clean-room.md](docs/11-legal-and-clean-room.md) for the
+full policy. In short:
+
+- Implement features from the specs in [`docs/`](docs/README.md), not by
+  reading another engine's source. General, widely-known techniques and
+  public documentation are fine; copying or adapting someone else's code,
+  tests, types or comments is not.
+- Public API names follow Kairon's own vocabulary
+  ([ADR 0010](docs/decisions/0010-own-api-vocabulary.md)), never another
+  engine's identifiers — see the
+  [API naming policy](docs/11-legal-and-clean-room.md#api-naming-policy)
+  for the specific list of names to avoid and why.
+- State the sources you used in the PR (specs, public docs, standards) —
+  this is part of the PR template.
+
+## Pull requests
+
+Opening a PR fills in the template
+([`.github/PULL_REQUEST_TEMPLATE.md`](.github/PULL_REQUEST_TEMPLATE.md)),
+which mirrors the
+[Definition of Done](docs/tasks/README.md#definition-of-done-every-task)
+every task in [`docs/tasks/`](docs/tasks/README.md) is held to: sources
+used, the naming policy followed, docs updated alongside behavior changes,
+and tests added. CI (lint, typecheck, test, build, license check) must pass
+before merging — see [.github/workflows/ci.yml](.github/workflows/ci.yml).
 
 ## Commit messages
 
