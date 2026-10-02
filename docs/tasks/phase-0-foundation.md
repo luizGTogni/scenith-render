@@ -13,7 +13,7 @@ forbidden imports; license check blocks non-allowed dependencies.
 | P0-03 | Shared TypeScript and build presets | infra | S | P0-01 | done |
 | P0-04 | Scaffold all packages | infra | M | P0-03 | done |
 | P0-05 | Lint, format and environment-boundary rules | infra | M | P0-03, P0-04 | done |
-| P0-06 | Vitest setup | infra | S | P0-03 | todo |
+| P0-06 | Vitest setup | infra | S | P0-03 | done |
 | P0-07 | Changesets with fixed versioning | infra | S | P0-04 | todo |
 | P0-08 | Dependency license check | infra | S | P0-01 | todo |
 | P0-09 | CI workflow | infra | M | P0-02, P0-05, P0-06, P0-08 | todo |
@@ -115,8 +115,30 @@ forbidden imports; license check blocks non-allowed dependencies.
 - **Type:** infra · **Package:** root · **Size:** S
 - **Depends on:** P0-03
 - **Done when:**
-  - [ ] Vitest workspace config; `jsdom` environment for browser packages, `node` for Node packages.
-  - [ ] Coverage report generated in CI.
+  - [x] Vitest workspace config; `jsdom` environment for browser packages,
+    `node` for Node packages. The environment split was already in place per
+    package since P0-04 (each package's own `vitest.config.(js|ts)`); what
+    this task adds is the root [`vitest.config.ts`](../../vitest.config.ts),
+    which aggregates every package (`test.projects: ["packages/*",
+    "tooling/eslint"]`) into one process. `tooling/typescript` and
+    `tooling/tsup` have no tests and are left out.
+  - [x] Coverage report generated in CI — `@vitest/coverage-v8` (v8
+    provider), `pnpm test:coverage` (`vitest run --coverage`, text + html +
+    lcov). This is a **separate** script from `pnpm test` (which still goes
+    through Turborepo, per-package, cached, uninstrumented) because Vitest's
+    coverage/reporting options are workspace-level — they only take effect
+    from the config that owns `projects` — and coverage instrumentation has
+    a real cost that shouldn't slow down the everyday `pnpm test` loop. CI
+    wiring (uploading the report) is P0-09.
+  - Verified: `pnpm test:coverage` → 11 test files, 15 tests, 100% coverage
+    (31/31 statements) — expected, since all source is still placeholders.
+  - One real issue found: under `--coverage`, three of
+    `@kairon/eslint-config`'s fixture tests (P0-05) — the ones that spin up a
+    real TypeScript program via `projectService`/`project` — exceeded
+    Vitest's default 5 s timeout (coverage instrumentation slows anything
+    touching the TypeScript compiler). Fixed with a package-level
+    `testTimeout: 20_000` in `tooling/eslint/vitest.config.js`; the tests
+    themselves were correct, just slow under instrumentation.
 
 ### P0-07 · Changesets with fixed versioning
 - **Type:** infra · **Package:** root · **Size:** S

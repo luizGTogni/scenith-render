@@ -3,6 +3,7 @@
   "private": true,
   "description": "Kairon Render — scene-first, React-powered video rendering engine.",
   "license": "MIT",
+  "type": "module",
   "engines": {
     "node": ">=22"
   },
@@ -13,13 +14,16 @@
     "typecheck": "turbo run typecheck",
     "lint": "turbo run lint",
     "test": "turbo run test",
+    "test:coverage": "vitest run --coverage",
     "dev": "turbo run dev",
     "format": "prettier --write .",
     "format:check": "prettier --check ."
   },
   "devDependencies": {
+    "@vitest/coverage-v8": "5.0.3",
     "prettier": "^3.9.9",
     "turbo": "^2.11.5",
-    "typescript": "5.9.3"
+    "typescript": "5.9.3",
+    "vitest": "5.0.3"
   }
 }
