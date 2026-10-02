@@ -208,8 +208,14 @@ forbidden imports; license check blocks non-allowed dependencies.
     https://github.com/luizGTogni/kairon-render/actions/runs/36948468240).
     Branch protection on `main` set via `gh api .../branches/main/protection`:
     required status check `lint, typecheck, test, build, license check`
-    (strict — branch must be up to date), `enforce_admins: true`, force
-    pushes and deletions disabled. Verified by reading the protection back.
+    (strict — branch must be up to date), force pushes and deletions
+    disabled. `enforce_admins` is **off**: the first push with it `true`
+    was correctly rejected (no commit can have a passing check before it is
+    pushed somewhere), and this is still a single-maintainer repo pushing
+    straight to `main` rather than through PRs — `enforce_admins: true`
+    would make every push impossible. The check still gates anyone merging
+    through a pull request. Revisit once this repo takes outside
+    contributions. Verified by reading the protection back.
   - Verified locally, running the exact sequence from the workflow
     (`pnpm install --frozen-lockfile` through `pnpm test:coverage`, from a
     cleared `.turbo` cache): all green. Then confirmed for real on GitHub
