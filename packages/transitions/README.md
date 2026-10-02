@@ -1,4 +1,4 @@
-# @kairon/transitions
+# @kairon-render/transitions
 
 Transition presets for clip edges.
 

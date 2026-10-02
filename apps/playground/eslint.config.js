@@ -1,4 +1,4 @@
-import { kaironConfig } from "@kairon/eslint-config";
+import { kaironConfig } from "@kairon-render/eslint-config";
 
 // The playground is a sandbox for exercising the engine during development
 // (see docs/04-packages.md), not a library with a constrained dependency

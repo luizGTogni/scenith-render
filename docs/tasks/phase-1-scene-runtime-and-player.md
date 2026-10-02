@@ -12,13 +12,13 @@ validate/normalize round trip unchanged.
 | **Decisions** |||||
 | P1-01 | ADR: scene versioning and migration policy | adr | S | — | todo |
 | P1-02 | ADR: text layout model | adr | S | — | todo |
-| **Data model** — `@kairon/schema` |||||
+| **Data model** — `@kairon-render/schema` |||||
 | P1-03 | Scene types and Zod schemas | feat | M | P0-13, P1-01 | todo |
 | P1-04 | Animation, keyframe and easing schemas | feat | S | P1-03 | todo |
 | P1-05 | `validateScene` with paths and codes | feat | M | P1-03, P1-04 | todo |
 | P1-06 | `normalizeScene` and metadata preservation | feat | M | P1-05 | todo |
 | P1-07 | Clip type registry | feat | M | P1-05 | todo |
-| **Runtime** — `@kairon/core`, `@kairon/media` |||||
+| **Runtime** — `@kairon-render/core`, `@kairon-render/media` |||||
 | P1-08 | Frame context, `Clip` and timeline hooks | feat | M | P0-04 | todo |
 | P1-09 | `Track`, `Repeat`, `FreezeFrame`, `Layer` | feat | M | P1-08 | todo |
 | P1-10 | `animate` with numeric keyframes | feat | M | P0-04 | todo |
@@ -33,7 +33,7 @@ validate/normalize round trip unchanged.
 | P1-19 | `text` clip type | feat | M | P1-02, P1-18, P1-17 | todo |
 | P1-20 | `<Image>` and `image` clip type | feat | M | P1-14, P1-18 | todo |
 | P1-21 | `shape` clip type | feat | S | P1-18 | todo |
-| **Driver** — `@kairon/player` |||||
+| **Driver** — `@kairon-render/player` |||||
 | P1-22 | Player core: clock, seek, scene mode, scaling | feat | L | P1-15, P1-18 | todo |
 | P1-23 | `PlayerRef` API and events | feat | M | P1-22 | todo |
 | P1-24 | Buffering and error boundary | feat | M | P1-22 | todo |

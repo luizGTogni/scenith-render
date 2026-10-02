@@ -1,4 +1,4 @@
-# @kairon/renderer
+# @kairon-render/renderer
 
 Headless Chromium + FFmpeg rendering.
 

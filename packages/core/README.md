@@ -1,4 +1,4 @@
-# @kairon/core
+# @kairon-render/core
 
 Timeline, hooks, animation and the frame driver contract.
 

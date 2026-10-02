@@ -7,7 +7,7 @@ import globals from "globals";
 import tseslint from "typescript-eslint";
 
 /**
- * Every `@kairon/*` package, kept in one place so each package's
+ * Every `@kairon-render/*` package, kept in one place so each package's
  * `allowedInternalDeps` can be turned into "forbid everything else" without
  * every package having to enumerate the packages it must NOT import.
  * Matches docs/04-packages.md#repository-layout.
@@ -74,13 +74,13 @@ export function kaironConfig({
 }) {
   const forbiddenKaironPackages = ALL_KAIRON_PACKAGES.filter(
     (name) => name !== packageName && !allowedInternalDeps.includes(name),
-  ).map((name) => `@kairon/${name}`);
+  ).map((name) => `@kairon-render/${name}`);
 
   /** @type {{ name: string; message: string }[]} */
   const restrictedPaths = forbiddenKaironPackages.map((name) => ({
     name,
     message:
-      `@kairon/${packageName} may not import ${name} ` +
+      `@kairon-render/${packageName} may not import ${name} ` +
       "(see docs/04-packages.md#dependency-graph).",
   }));
 
@@ -89,7 +89,7 @@ export function kaironConfig({
       restrictedPaths.push({
         name: specifier,
         message:
-          `@kairon/${packageName} runs in the browser and may not import ` +
+          `@kairon-render/${packageName} runs in the browser and may not import ` +
           `Node built-ins (got '${specifier}'); see ` +
           "docs/04-packages.md#environment-boundaries.",
       });
@@ -101,7 +101,7 @@ export function kaironConfig({
       restrictedPaths.push({
         name,
         message:
-          `@kairon/${packageName} is isomorphic and may not import '${name}'` +
+          `@kairon-render/${packageName} is isomorphic and may not import '${name}'` +
           " (see docs/04-packages.md#environment-boundaries).",
       });
     }

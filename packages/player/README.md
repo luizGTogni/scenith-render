@@ -1,4 +1,4 @@
-# @kairon/player
+# @kairon-render/player
 
 Real-time scene and composition preview.
 

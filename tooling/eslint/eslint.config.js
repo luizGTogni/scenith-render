@@ -1,4 +1,4 @@
-// This package IS @kairon/eslint-config, so it imports itself by relative
+// This package IS @kairon-render/eslint-config, so it imports itself by relative
 // path rather than depending on its own published name.
 import { kaironConfig } from "./index.js";
 

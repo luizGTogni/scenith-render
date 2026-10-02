@@ -1,4 +1,4 @@
-# @kairon/media
+# @kairon-render/media
 
 Media components: <Video>, <Audio>, <Image>, <Gif> and font loading.
 

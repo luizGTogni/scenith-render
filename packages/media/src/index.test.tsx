@@ -1,9 +1,11 @@
 import { describe, expect, it } from "vitest";
 import { placeholder } from "./index.js";
 
-describe("@kairon/media", () => {
+describe("@kairon-render/media", () => {
   it("builds a placeholder element", () => {
     const element = placeholder();
-    expect(element.props["data-kairon-placeholder"]).toBe("@kairon/media");
+    expect(element.props["data-kairon-placeholder"]).toBe(
+      "@kairon-render/media",
+    );
   });
 });

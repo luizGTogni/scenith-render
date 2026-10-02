@@ -1,4 +1,4 @@
-import { kaironConfig } from "@kairon/eslint-config";
+import { kaironConfig } from "@kairon-render/eslint-config";
 
 export default kaironConfig({
   package: "renderer",

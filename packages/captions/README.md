@@ -1,4 +1,4 @@
-# @kairon/captions
+# @kairon-render/captions
 
 Word-by-word animated captions.
 

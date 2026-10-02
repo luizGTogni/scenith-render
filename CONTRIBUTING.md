@@ -28,8 +28,8 @@ Turborepo, scoped to the packages it touches, with caching — see
 | `pnpm changeset` | Record a change for the next release (see [Versioning](#versioning-changesets)). |
 
 Scope any command to one package with `--filter`, e.g.
-`pnpm --filter @kairon/core test`. To try the engine interactively,
-`pnpm --filter @kairon/playground dev` starts the sandbox app
+`pnpm --filter @kairon-render/core test`. To try the engine interactively,
+`pnpm --filter @kairon-render/playground dev` starts the sandbox app
 (see [apps/playground](apps/playground/README.md)).
 
 FFmpeg is not needed yet for Phase 0/1 work. It becomes a prerequisite once
@@ -134,7 +134,7 @@ git config core.hooksPath .githooks
 
 ## Versioning (Changesets)
 
-All `@kairon/*` product packages (`core`, `schema`, `media`, `captions`,
+All `@kairon-render/*` product packages (`core`, `schema`, `media`, `captions`,
 `transitions`, `player`, `bundler`, `renderer`, `cli`) are versioned and
 released together, as one `fixed` [Changesets](https://github.com/changesets/changesets)
 group — see [ADR 0002](docs/decisions/0002-monorepo-tooling.md) and

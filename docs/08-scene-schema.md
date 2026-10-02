@@ -123,7 +123,7 @@ Rules:
 Custom React components become clip types:
 
 ```ts
-import { defineClipType } from "@kairon/schema";
+import { defineClipType } from "@kairon-render/schema";
 
 export const LowerThird = defineClipType({
   name: "lower-third",
@@ -164,7 +164,7 @@ clips are reordered.
 ## Runtime
 
 ```tsx
-import { SceneView } from "@kairon/schema/react";
+import { SceneView } from "@kairon-render/schema/react";
 
 <SceneView scene={scene} registry={registry} />
 ```

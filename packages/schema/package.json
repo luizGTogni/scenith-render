@@ -1,5 +1,5 @@
 {
-  "name": "@kairon/schema",
+  "name": "@kairon-render/schema",
   "version": "0.0.0",
   "description": "The scene schema: types, validation, patches and the React scene runtime.",
   "license": "MIT",
@@ -38,9 +38,9 @@
     }
   },
   "devDependencies": {
-    "@kairon/eslint-config": "workspace:*",
-    "@kairon/tsconfig": "workspace:*",
-    "@kairon/tsup-config": "workspace:*",
+    "@kairon-render/eslint-config": "workspace:*",
+    "@kairon-render/tsconfig": "workspace:*",
+    "@kairon-render/tsup-config": "workspace:*",
     "@types/react": "^19.3.0",
     "eslint": "^10.11.0",
     "jsdom": "^30.1.1",

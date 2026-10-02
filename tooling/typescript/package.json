@@ -1,5 +1,5 @@
 {
-  "name": "@kairon/tsconfig",
+  "name": "@kairon-render/tsconfig",
   "version": "0.0.0",
   "private": true,
   "type": "module",
@@ -13,7 +13,7 @@
     "lint": "eslint ."
   },
   "devDependencies": {
-    "@kairon/eslint-config": "workspace:*",
+    "@kairon-render/eslint-config": "workspace:*",
     "eslint": "^10.11.0"
   }
 }

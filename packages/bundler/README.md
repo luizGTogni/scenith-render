@@ -1,4 +1,4 @@
-# @kairon/bundler
+# @kairon-render/bundler
 
 Builds project bundles with Vite.
 

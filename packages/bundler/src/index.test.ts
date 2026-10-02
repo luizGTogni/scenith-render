@@ -1,8 +1,8 @@
 import { describe, expect, it } from "vitest";
 import { placeholder } from "./index.js";
 
-describe("@kairon/bundler", () => {
+describe("@kairon-render/bundler", () => {
   it("includes the package name", () => {
-    expect(placeholder()).toContain("@kairon/bundler");
+    expect(placeholder()).toContain("@kairon-render/bundler");
   });
 });

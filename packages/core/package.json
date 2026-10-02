@@ -1,5 +1,5 @@
 {
-  "name": "@kairon/core",
+  "name": "@kairon-render/core",
   "version": "0.0.0",
   "description": "Timeline, hooks, animation and the frame driver contract.",
   "license": "MIT",
@@ -29,9 +29,9 @@
     "react": "^19.0.0"
   },
   "devDependencies": {
-    "@kairon/eslint-config": "workspace:*",
-    "@kairon/tsconfig": "workspace:*",
-    "@kairon/tsup-config": "workspace:*",
+    "@kairon-render/eslint-config": "workspace:*",
+    "@kairon-render/tsconfig": "workspace:*",
+    "@kairon-render/tsup-config": "workspace:*",
     "@types/react": "^19.3.0",
     "eslint": "^10.11.0",
     "jsdom": "^30.1.1",

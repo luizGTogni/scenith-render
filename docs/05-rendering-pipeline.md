@@ -21,15 +21,15 @@ How `kairon render scene.json out.mp4` turns a scene into a video file.
 
 - Input is either a scene (`{ scene, build? }`) or a composition of a
   project (`{ build, composition, props }`).
-- Scenes are validated and normalized **in Node** with `@kairon/schema`
+- Scenes are validated and normalized **in Node** with `@kairon-render/schema`
   before any browser starts, so invalid input fails fast with scene paths.
 
 ## 2–3. Runtime and serving
 
 - Scenes that only use built-in clip types use the **standard runtime**
-  shipped inside `@kairon/renderer`. No build step.
+  shipped inside `@kairon-render/renderer`. No build step.
 - Projects with custom clip types or code compositions are built by
-  `@kairon/bundler` into a project bundle, cached by content hash.
+  `@kairon-render/bundler` into a project bundle, cached by content hash.
 - A local HTTP server (random free port) serves:
   - the runtime (`/`),
   - public assets (`/public/*`),
@@ -174,4 +174,4 @@ Used for thumbnails and posters.
 Chunks are already independent units with stable keys, so they can run on
 different machines: a coordinator plans the grid, workers run
 `renderChunk()` and upload segments, the coordinator assembles. This lives
-in a future `@kairon/cloud` package.
+in a future `@kairon-render/cloud` package.

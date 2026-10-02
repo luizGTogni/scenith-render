@@ -23,11 +23,11 @@ architecture layers ([03](../03-architecture.md#layers-of-responsibility)):
 
 ```
 1. Decisions     ADRs and spikes that later tasks depend on
-2. Data model    schema types, validation        (@kairon/schema)
-3. Runtime       timeline, animation, clip types (@kairon/core, media, captions, ...)
-4. Drivers       player and page bridge          (@kairon/player, bridge)
-5. Output        capture, encoding, audio        (@kairon/renderer)
-6. Interface     CLI, preview app                (@kairon/cli, apps)
+2. Data model    schema types, validation        (@kairon-render/schema)
+3. Runtime       timeline, animation, clip types (@kairon-render/core, media, captions, ...)
+4. Drivers       player and page bridge          (@kairon-render/player, bridge)
+5. Output        capture, encoding, audio        (@kairon-render/renderer)
+6. Interface     CLI, preview app                (@kairon-render/cli, apps)
 7. Verification  tests that prove the phase exit criteria
 ```
 

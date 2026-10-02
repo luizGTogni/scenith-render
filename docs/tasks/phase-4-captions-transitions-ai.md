@@ -11,7 +11,7 @@ patches.
 |----|-------|------|------|------------|--------|
 | **Decisions** |||||
 | P4-01 | ADR: transition model and crossfade rules | adr | S | — | todo |
-| **Data model** — `@kairon/schema` |||||
+| **Data model** — `@kairon-render/schema` |||||
 | P4-02 | Transitions in the schema and visible ranges | feat | M | P4-01, P1-06 | todo |
 | P4-03 | `captions` clip schema and word validation | feat | S | P1-07 | todo |
 | P4-04 | `applyPatch` with `@id` paths | feat | M | P1-05 | todo |

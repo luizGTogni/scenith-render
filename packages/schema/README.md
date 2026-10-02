@@ -1,4 +1,4 @@
-# @kairon/schema
+# @kairon-render/schema
 
 The scene schema: types, validation, patches and the React scene runtime.
 
@@ -11,8 +11,8 @@ why this package has two entries.
 
 | Entry | Runs in | Contents |
 |-------|---------|----------|
-| `@kairon/schema` | Anywhere (no DOM, no Node) | Types, Zod schemas, `validateScene`, `normalizeScene`, `migrateScene`, `applyPatch`, `toJsonSchema`. |
-| `@kairon/schema/react` | Browser | `SceneView` and the built-in clip types. |
+| `@kairon-render/schema` | Anywhere (no DOM, no Node) | Types, Zod schemas, `validateScene`, `normalizeScene`, `migrateScene`, `applyPatch`, `toJsonSchema`. |
+| `@kairon-render/schema/react` | Browser | `SceneView` and the built-in clip types. |
 
 > Not implemented yet — see
 > [docs/tasks/](../../docs/tasks/README.md) for the build order.

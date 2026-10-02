@@ -1,4 +1,4 @@
-# @kairon/cli
+# @kairon-render/cli
 
 The `kairon` command.
 

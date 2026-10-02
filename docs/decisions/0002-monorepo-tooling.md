@@ -14,7 +14,7 @@ and must share one version.
 - **Turborepo** for task orchestration and caching.
 - **TypeScript** in strict mode for all code; packages build with `tsup`.
 - **Vitest** for unit tests, **Changesets** for versioning with all
-  `@kairon/*` packages released at the same version.
+  `@kairon-render/*` packages released at the same version.
 - Node.js LTS as the minimum runtime; React 19 as the peer dependency.
 
 ## Alternatives considered

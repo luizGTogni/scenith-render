@@ -4,20 +4,24 @@
   "commit": false,
   "fixed": [
     [
-      "@kairon/core",
-      "@kairon/schema",
-      "@kairon/media",
-      "@kairon/captions",
-      "@kairon/transitions",
-      "@kairon/player",
-      "@kairon/bundler",
-      "@kairon/renderer",
-      "@kairon/cli"
+      "@kairon-render/core",
+      "@kairon-render/schema",
+      "@kairon-render/media",
+      "@kairon-render/captions",
+      "@kairon-render/transitions",
+      "@kairon-render/player",
+      "@kairon-render/bundler",
+      "@kairon-render/renderer",
+      "@kairon-render/cli"
     ]
   ],
   "linked": [],
   "access": "public",
   "baseBranch": "main",
   "updateInternalDependencies": "patch",
-  "ignore": ["@kairon/tsconfig", "@kairon/tsup-config", "@kairon/eslint-config"]
+  "ignore": [
+    "@kairon-render/tsconfig",
+    "@kairon-render/tsup-config",
+    "@kairon-render/eslint-config"
+  ]
 }

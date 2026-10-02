@@ -21,7 +21,7 @@ chunks; a custom clip type works in a scene in player and render.
 | P5-08 | GIF and PNG sequence | feat | M | P2-12 | todo |
 | P5-09 | Opt-in hardware encoders | feat | M | P2-08 | todo |
 | **Extensibility** |||||
-| P5-10 | `@kairon/bundler`: project bundles | feat | L | P2-09 | todo |
+| P5-10 | `@kairon-render/bundler`: project bundles | feat | L | P2-09 | todo |
 | P5-11 | Custom clip types end to end | feat | M | P5-10, P1-07 | todo |
 | P5-12 | `cacheable: false` clip types | feat | S | P5-03, P5-11 | todo |
 | P5-13 | Code-based compositions and `resolve` | feat | M | P5-10 | todo |
@@ -86,7 +86,7 @@ chunks; a custom clip type works in a scene in player and render.
 - **Depends on:** P2-08
 - **Done when:** [ ] `hardwareAcceleration: "auto"` picks NVENC/VideoToolbox/VAAPI when present; [ ] falls back to software with a warning.
 
-### P5-10 · `@kairon/bundler`: project bundles
+### P5-10 · `@kairon-render/bundler`: project bundles
 - **Type:** feat · **Package:** bundler · **Size:** L
 - **Depends on:** P2-09
 - **Refs:** [ADR 0003](../decisions/0003-vite-as-bundler.md), [03 — runtime bundles](../03-architecture.md#runtime-bundles)

@@ -2,7 +2,7 @@
 
 **Goal:** a stable, documented public release.
 
-**Exit criteria:** all `@kairon/*` packages published at 1.0.0 under MIT;
+**Exit criteria:** all `@kairon-render/*` packages published at 1.0.0 under MIT;
 public API locked by an API report in CI; docs and examples complete.
 
 | ID | Title | Type | Size | Depends on | Status |
@@ -21,7 +21,14 @@ public API locked by an API report in CI; docs and examples complete.
 ### P6-01 · Legal review of license, FFmpeg and naming policies
 - **Type:** adr · **Size:** S
 - **Refs:** [11](../11-legal-and-clean-room.md), [ADR 0007](../decisions/0007-mit-license.md), [ADR 0008](../decisions/0008-ffmpeg-not-bundled.md), [ADR 0010](../decisions/0010-own-api-vocabulary.md)
-- **Done when:** [ ] a lawyer reviewed the three policies; [ ] findings recorded as an ADR (or "no changes").
+- **Also cover:** the trademark/prior-use risk found informally in
+  [P0-12](phase-0-foundation.md) — an established open-source "Kairon"
+  conversational-AI platform (digiteinfotech/NimbleWork) predates us, and
+  `@kairon` was already taken on npm by a third, unrelated product
+  (`heykairon`). A real USPTO/EUIPO and common-law search is needed before
+  any public launch, trademark filing or domain purchase.
+- **Done when:** [ ] a lawyer reviewed the three policies and the naming
+  risk above; [ ] findings recorded as an ADR (or "no changes").
 
 ### P6-02 · Public API audit and reference docs
 - **Type:** docs · **Size:** M
@@ -49,7 +56,7 @@ public API locked by an API report in CI; docs and examples complete.
 ### P6-07 · Release pipeline
 - **Type:** infra · **Size:** M
 - **Depends on:** P6-03
-- **Done when:** [ ] Changesets publishes all packages with npm provenance; [ ] prebuilt standard runtime included in `@kairon/renderer`; [ ] smoke test installs from the registry and renders a scene.
+- **Done when:** [ ] Changesets publishes all packages with npm provenance; [ ] prebuilt standard runtime included in `@kairon-render/renderer`; [ ] smoke test installs from the registry and renders a scene.
 
 ### P6-08 · Release v1.0.0
 - **Type:** infra · **Size:** S

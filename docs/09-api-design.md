@@ -14,7 +14,7 @@ may change before v1.0.
 - **Frames everywhere** on the timeline (`seconds(2.5)` converts).
 - **Small surface.** Every export is documented and justified.
 
-## `@kairon/core`
+## `@kairon-render/core`
 
 ```ts
 // Project definition (default export of the project entry file)
@@ -63,7 +63,7 @@ random(seed: string | number): number;   // 0..1, deterministic
 seconds(s: number): number;               // frames at the current fps
 ```
 
-## `@kairon/media`
+## `@kairon-render/media`
 
 ```ts
 <Video src trimStart? trimEnd? volume? speed? muted? loop? fit? />
@@ -77,7 +77,7 @@ preload(src: string): { ready: Promise<void>; release(): void };
 probeMedia(src: string): Promise<{ duration: number; width?; height?; fps?; hasVideo; hasAudio }>;
 ```
 
-## `@kairon/captions`
+## `@kairon-render/captions`
 
 ```ts
 <Captions words preset? style? grouping? position? pageTransition? />
@@ -90,7 +90,7 @@ cuesToWords(cues: Cue[]): Word[];
 
 See [12 — Captions](12-captions.md).
 
-## `@kairon/transitions`
+## `@kairon-render/transitions`
 
 ```ts
 fade({ duration }) · slide({ duration, direction }) · wipe({ duration, direction }) · zoom({ duration })
@@ -100,12 +100,12 @@ defineTransition({ name, props, render })
 fade({ duration: 15 })  // → { type: "fade", duration: 15 }
 ```
 
-## `@kairon/schema`
+## `@kairon-render/schema`
 
 See [08 — Scene Schema](08-scene-schema.md#api). Root entry is
-environment-agnostic; `@kairon/schema/react` exports `SceneView`.
+environment-agnostic; `@kairon-render/schema/react` exports `SceneView`.
 
-## `@kairon/player`
+## `@kairon-render/player`
 
 ```ts
 <Player
@@ -119,7 +119,7 @@ environment-agnostic; `@kairon/schema/react` exports `SceneView`.
 <FrameView scene | composition frame />
 ```
 
-## `@kairon/renderer` (Node)
+## `@kairon-render/renderer` (Node)
 
 ```ts
 buildProject({ entry, outDir?, onProgress? }): Promise<ProjectBuild>;
@@ -153,7 +153,7 @@ interface ChunkStore {                    // plug in S3, Redis, etc.
 }
 ```
 
-## `@kairon/cli`
+## `@kairon-render/cli`
 
 ```bash
 kairon render <scene.json | composition-id> <output>   # render a video
@@ -172,7 +172,7 @@ kairon benchmark <scene.json | composition-id>         # compare concurrency set
 ## `kairon.config.ts`
 
 ```ts
-import { defineConfig } from "@kairon/cli";
+import { defineConfig } from "@kairon-render/cli";
 
 export default defineConfig({
   entry: "src/index.ts",

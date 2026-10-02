@@ -1,5 +1,5 @@
 {
-  "name": "@kairon/bundler",
+  "name": "@kairon-render/bundler",
   "version": "0.0.0",
   "description": "Builds project bundles with Vite.",
   "license": "MIT",
@@ -26,9 +26,9 @@
     "typecheck": "tsc -p tsconfig.json --noEmit"
   },
   "devDependencies": {
-    "@kairon/eslint-config": "workspace:*",
-    "@kairon/tsconfig": "workspace:*",
-    "@kairon/tsup-config": "workspace:*",
+    "@kairon-render/eslint-config": "workspace:*",
+    "@kairon-render/tsconfig": "workspace:*",
+    "@kairon-render/tsup-config": "workspace:*",
     "@types/node": "^26.6.3",
     "eslint": "^10.11.0",
     "tsup": "^8.5.1",

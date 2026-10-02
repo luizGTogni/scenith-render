@@ -8,7 +8,7 @@
                      │ scene.json  (+ optional custom clip types in React)
                      ▼
         ┌─────────────────────────────┐
-        │ @kairon/schema              │  validate · migrate · patch · normalize
+        │ @kairon-render/schema              │  validate · migrate · patch · normalize
         └──────────────┬──────────────┘
                        ▼
         ┌─────────────────────────────┐
@@ -18,29 +18,29 @@
         └───────┬──────────────┬──────┘
                 ▼              ▼
      ┌────────────────┐  ┌──────────────────────────────────┐
-     │ @kairon/player │  │ @kairon/renderer (Node)          │
+     │ @kairon-render/player │  │ @kairon-render/renderer (Node)          │
      │ browser preview│  │ runtime in headless Chromium     │
      │ (real time)    │  │ → frames → FFmpeg → file         │
      └────────────────┘  └────────────────▲─────────────────┘
                                           │
                                  ┌────────┴────────┐
-                                 │ @kairon/cli     │
+                                 │ @kairon-render/cli     │
                                  └─────────────────┘
 ```
 
 ## Layers of responsibility
 
-1. **Scene layer** — `@kairon/schema`. The data model: types, validation,
+1. **Scene layer** — `@kairon-render/schema`. The data model: types, validation,
    migrations, patches. Runs in Node and in the browser.
 2. **Clip type layer** — React components that draw one kind of clip.
-   Built-ins live in `@kairon/media`, `@kairon/captions` and the schema's
+   Built-ins live in `@kairon-render/media`, `@kairon-render/captions` and the schema's
    React entry; custom ones are written by developers.
-3. **Timeline runtime** — `@kairon/core`. Holds the current frame in React
+3. **Timeline runtime** — `@kairon-render/core`. Holds the current frame in React
    context, resolves clip offsets, keyframes, holds. It knows nothing about
    how frames are displayed or captured.
 4. **Frame drivers** — who decides which frame is shown: the player (real
    time) or the renderer (one frame at a time, on command).
-5. **Output layer** — `@kairon/renderer`. Captures frames, extracts media,
+5. **Output layer** — `@kairon-render/renderer`. Captures frames, extracts media,
    mixes audio, encodes and caches chunks.
 
 The key rule: **the timeline runtime is shared and environment-agnostic.**
@@ -53,8 +53,8 @@ There are two kinds:
 
 | Bundle | Contains | Build step |
 |--------|----------|------------|
-| **Standard runtime** | Core + all built-in clip types. | None. Prebuilt and shipped inside `@kairon/renderer`. |
-| **Project bundle** | Standard runtime + the project's custom clip types and code compositions. | Built by `@kairon/bundler` (Vite), cached by content hash. |
+| **Standard runtime** | Core + all built-in clip types. | None. Prebuilt and shipped inside `@kairon-render/renderer`. |
+| **Project bundle** | Standard runtime + the project's custom clip types and code compositions. | Built by `@kairon-render/bundler` (Vite), cached by content hash. |
 
 A scene that only uses built-in clip types renders with the standard
 runtime: no project, no Vite, no build.
@@ -118,6 +118,6 @@ User or AI edit ─► applyPatch(scene, ops) ─► new scene ─► Player re-
 | **Errors** | Every error has a code (`KAIRON_E_HOLD_TIMEOUT`), a message, a hint, and when relevant a frame number and a scene path (`tracks[1].clips[3]`). |
 | **Host data** | `metadata` fields on scenes, tracks, clips and assets are preserved end to end and never read. |
 | **Logging** | Structured logs (`level`, `scope`, `frame`), verbosity controlled by the CLI. |
-| **Versioning** | All `@kairon/*` packages share one version. The scene format has its own `version`, migrated by `migrateScene`. |
+| **Versioning** | All `@kairon-render/*` packages share one version. The scene format has its own `version`, migrated by `migrateScene`. |
 | **Testing** | Unit tests for math, timeline and schema; visual regression tests that render reference scenes and diff frames against golden images. |
 | **Performance** | Benchmark suite of reference scenes in CI. |

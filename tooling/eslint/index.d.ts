@@ -9,20 +9,20 @@ import type { Linter } from "eslint";
  * - "node": Node built-ins and globals available; browser globals
  *   (`window`, `document`, ...) are forbidden.
  * - "isomorphic": neither. Also forbids importing `react`/`react-dom`
- *   (this is `@kairon/schema`'s root entry).
+ *   (this is `@kairon-render/schema`'s root entry).
  */
 export type KaironLintEnvironment = "browser" | "node" | "isomorphic";
 
 export interface KaironConfigOptions {
-  /** The package's own name, e.g. "core" (without the `@kairon/` prefix). */
+  /** The package's own name, e.g. "core" (without the `@kairon-render/` prefix). */
   package: string;
   /** Where this package's code runs. */
   environment: KaironLintEnvironment;
   /**
-   * Other `@kairon/*` packages (without the prefix) this package may
+   * Other `@kairon-render/*` packages (without the prefix) this package may
    * import, per the dependency graph in
    * docs/04-packages.md#dependency-graph. Everything else under
-   * `@kairon/*` is rejected by `no-restricted-imports`.
+   * `@kairon-render/*` is rejected by `no-restricted-imports`.
    */
   allowedInternalDeps?: string[];
   /**
@@ -33,14 +33,14 @@ export interface KaironConfigOptions {
   /**
    * Glob(s) this config applies to, relative to the package root. Defaults
    * to `["**\/*.{ts,tsx}"]`. Override this when a package has source in more
-   * than one environment — `@kairon/schema` calls `kaironConfig` twice, once
+   * than one environment — `@kairon-render/schema` calls `kaironConfig` twice, once
    * per entry, each with its own `files` and `environment`.
    */
   files?: string[];
   /**
    * Explicit tsconfig filename(s) (relative to `tsconfigRootDir`) for this
    * `files` group. Only needed when a package has more than one tsconfig
-   * (`@kairon/schema`'s `tsconfig.json` + `tsconfig.react.json`) — type-aware
+   * (`@kairon-render/schema`'s `tsconfig.json` + `tsconfig.react.json`) — type-aware
    * linting's default auto-discovery only looks for `tsconfig.json`.
    */
   project?: string[];

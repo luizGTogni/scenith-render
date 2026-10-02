@@ -49,7 +49,7 @@ describe("kaironConfig: environment boundaries", () => {
     expect(ruleIds(messages)).toContain("no-restricted-globals");
   });
 
-  it("forbids the @kairon/schema root entry from importing react", () => {
+  it("forbids the @kairon-render/schema root entry from importing react", () => {
     const root = path.resolve(import.meta.dirname, "../../packages/schema");
     const config = kaironConfig({
       package: "schema",
@@ -70,7 +70,7 @@ describe("kaironConfig: environment boundaries", () => {
     expect(ruleIds(messages)).toContain("no-restricted-imports");
   });
 
-  it("forbids importing a @kairon/* package outside the dependency graph", () => {
+  it("forbids importing a @kairon-render/* package outside the dependency graph", () => {
     // docs/04-packages.md#dependency-graph: `media` may depend on `core`
     // only, never on another leaf package like `captions`.
     const root = path.resolve(import.meta.dirname, "../../packages/media");
@@ -83,7 +83,7 @@ describe("kaironConfig: environment boundaries", () => {
     const linter = new Linter({ cwd: root });
 
     const messages = linter.verify(
-      'import "@kairon/captions";\n',
+      'import "@kairon-render/captions";\n',
       config,
       "src/index.tsx",
     );
@@ -102,7 +102,7 @@ describe("kaironConfig: environment boundaries", () => {
     const linter = new Linter({ cwd: root });
 
     const messages = linter.verify(
-      'import "@kairon/core";\n',
+      'import "@kairon-render/core";\n',
       config,
       "src/index.tsx",
     );

@@ -1,6 +1,6 @@
 # 06 — Player
 
-`@kairon/player` previews a scene or a composition in any React app, in
+`@kairon-render/player` previews a scene or a composition in any React app, in
 real time, without rendering a file. It is the heart of any editor built on
 Kairon.
 
@@ -9,7 +9,7 @@ Kairon.
 ### Scene mode (main use)
 
 ```tsx
-import { Player, type PlayerRef } from "@kairon/player";
+import { Player, type PlayerRef } from "@kairon-render/player";
 
 const ref = useRef<PlayerRef>(null);
 

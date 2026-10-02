@@ -19,13 +19,13 @@ first; the bundler and code-based compositions come later.
 
 ## Phase 1 — Scene runtime + Player (MVP preview)
 
-- `@kairon/core`: `Clip`, `Track`, `Repeat`, `FreezeFrame`, `Layer`, hooks,
+- `@kairon-render/core`: `Clip`, `Track`, `Repeat`, `FreezeFrame`, `Layer`, hooks,
   `animate`, easings (incl. spring), `random`, holds, frame driver.
-- `@kairon/schema`: types, Zod validation with paths and codes,
+- `@kairon-render/schema`: types, Zod validation with paths and codes,
   `normalizeScene`, `version`, `metadata` preservation.
 - `SceneView` with built-in `text`, `image` and `shape` clip types,
   keyframe animations.
-- `@kairon/player` in scene mode: play, pause, seek, loop, scaling, events.
+- `@kairon-render/player` in scene mode: play, pause, seek, loop, scaling, events.
 - `<Image>` and `loadFont` with holds.
 
 **Exit:** a hand-written `scene.json` with animated text and images plays and
@@ -35,9 +35,9 @@ seeks correctly in the playground; invalid scenes return path-level errors;
 ## Phase 2 — Server rendering (MVP export)
 
 - Prebuilt standard runtime and page bridge.
-- `@kairon/renderer`: FFmpeg detection, browser launch, capture loop,
+- `@kairon-render/renderer`: FFmpeg detection, browser launch, capture loop,
   chunk grid encoding + concat (single worker), `renderImage`.
-- `@kairon/cli`: `render`, `image`, `validate`.
+- `@kairon-render/cli`: `render`, `image`, `validate`.
 - Visual regression harness (golden frames).
 
 **Exit:** `kairon render scene.json out.mp4` produces a correct MP4 with no
@@ -58,9 +58,9 @@ measures −14 LUFS ±1 LU.
 
 ## Phase 4 — Captions, transitions and AI tooling
 
-- `@kairon/captions`: `captions` clip type, grouping, presets, styles,
+- `@kairon-render/captions`: `captions` clip type, grouping, presets, styles,
   SRT/VTT import.
-- `@kairon/transitions`: presets, `transitionIn`/`transitionOut`, crossfades.
+- `@kairon-render/transitions`: presets, `transitionIn`/`transitionOut`, crossfades.
 - `applyPatch` with `@id` paths, `migrateScene`, `toJsonSchema`,
   `describeRegistry`, `kairon schema`.
 
@@ -75,7 +75,7 @@ for a test set of prompts and applies edits as patches.
   interface, `--verify-cache`.
 - WebM, ProRes, GIF, PNG sequence, transparency; opt-in hardware encoders;
   `kairon benchmark`.
-- Code extensions: `defineClipType` with custom components, `@kairon/bundler`
+- Code extensions: `defineClipType` with custom components, `@kairon-render/bundler`
   (Vite), project bundles, code-based compositions with `cacheKey`,
   `kairon preview` app.
 - Docs and examples teach "code as clip types inside a scene" as the
@@ -94,7 +94,7 @@ editing one 3 s text clip in a 60 s scene re-renders at most 3 chunks.
 
 - Automatic prop dependency tracking for incremental export of code-based
   compositions (`cache: { trackProps: true }`).
-- `@kairon/cloud`: distributed rendering (coordinator + `renderChunk` workers).
+- `@kairon-render/cloud`: distributed rendering (coordinator + `renderChunk` workers).
 - Client-side export with WebCodecs for canvas-based scenes.
 - Per-source loudness normalization and automatic ducking (music under voice).
 - Audio visualization helpers (waveforms, spectrum).

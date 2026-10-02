@@ -118,7 +118,7 @@ in the caller, not in Kairon.
 ## React usage
 
 ```tsx
-import { Captions } from "@kairon/captions";
+import { Captions } from "@kairon-render/captions";
 
 <Captions words={words} preset="highlight" style={{ activeColor: "#00E0FF" }} />
 ```

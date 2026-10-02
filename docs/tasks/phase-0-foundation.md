@@ -19,7 +19,7 @@ forbidden imports; license check blocks non-allowed dependencies.
 | P0-09 | CI workflow | infra | M | P0-02, P0-05, P0-06, P0-08 | done |
 | P0-10 | Playground app | infra | S | P0-04 | done |
 | P0-11 | CONTRIBUTING and PR template | docs | S | — | done |
-| P0-12 | Reserve npm scope and check trademark | infra | S | — | todo |
+| P0-12 | Reserve npm scope and check trademark | infra | S | — | done |
 | P0-13 | ADR: error model and shared isomorphic code | adr | S | — | todo |
 
 ---
@@ -52,7 +52,7 @@ forbidden imports; license check blocks non-allowed dependencies.
   - [x] Base `tsconfig` with `strict`, `noUncheckedIndexedAccess`, `exactOptionalPropertyTypes`.
   - [x] Separate presets for browser (DOM lib) and Node (no DOM lib) packages.
   - [x] Shared `tsup` preset producing ESM + type declarations.
-  - Verified with a throwaway package built against each preset (not committed): `noUncheckedIndexedAccess` catches an unguarded index, the Node preset has no DOM lib, the browser preset compiles JSX against a `react` peer, and `tsup` + `@kairon/tsup-config` emit ESM and a `.d.ts`. Pinned `typescript` to `5.9.3` because `tsup`'s declaration bundler is not yet compatible with `typescript@7` (see [tooling/README.md](../../tooling/README.md)).
+  - Verified with a throwaway package built against each preset (not committed): `noUncheckedIndexedAccess` catches an unguarded index, the Node preset has no DOM lib, the browser preset compiles JSX against a `react` peer, and `tsup` + `@kairon-render/tsup-config` emit ESM and a `.d.ts`. Pinned `typescript` to `5.9.3` because `tsup`'s declaration bundler is not yet compatible with `typescript@7` (see [tooling/README.md](../../tooling/README.md)).
 
 ### P0-04 · Scaffold all packages
 - **Type:** infra · **Package:** all · **Size:** M
@@ -60,7 +60,7 @@ forbidden imports; license check blocks non-allowed dependencies.
 - **Refs:** [04 — layout](../04-packages.md#repository-layout), [ADR 0007](../decisions/0007-mit-license.md)
 - **Done when:**
   - [x] `core`, `schema`, `media`, `captions`, `transitions`, `player`, `bundler`, `renderer`, `cli` exist with `src/index.(ts|tsx)`, README, `"license": "MIT"`.
-  - [x] `@kairon/schema` exposes two entries: root (`tsconfig.json`, no DOM lib) and `/react` (`tsconfig.react.json`, DOM + JSX); both type-check and build (`tsconfig.build.json` for bundling only).
+  - [x] `@kairon-render/schema` exposes two entries: root (`tsconfig.json`, no DOM lib) and `/react` (`tsconfig.react.json`, DOM + JSX); both type-check and build (`tsconfig.build.json` for bundling only).
   - [x] `react` is a peer dependency of browser packages (`core`, `media`, `captions`, `transitions`, `player`) and an optional peer of `schema` (only its `/react` entry needs it).
   - [x] Every package builds, type-checks and exports one placeholder with a passing test (`pnpm build|typecheck|test` all green across all 9 packages). Browser placeholders return a typed `ReactElement`, proving DOM + JSX; Node placeholders call `node:os`, proving the Node lib; `schema`'s root placeholder is a plain constant, proving no DOM/Node leak into the isomorphic entry.
   - Pinned `typescript@5.9.3` (not `7.x`, see [tooling/README.md](../../tooling/README.md)) also fixed `tsup`'s dts build for all packages. Fixed `kaironPreset`'s default entry glob (`src/index.{ts,tsx}`) to match `.tsx` placeholder sources — it previously only matched `.ts`.
@@ -71,11 +71,11 @@ forbidden imports; license check blocks non-allowed dependencies.
 - **Refs:** [04 — environment boundaries](../04-packages.md#environment-boundaries)
 - **Done when:**
   - [x] ESLint + Prettier configured for all packages. `tooling/eslint`
-    (`@kairon/eslint-config`) exports `kaironConfig({ package, environment,
+    (`@kairon-render/eslint-config`) exports `kaironConfig({ package, environment,
     allowedInternalDeps, tsconfigRootDir, files?, project? })`; every package
     (the 9 product packages + the `tooling/*` packages themselves) has its
     own tiny `eslint.config.js` calling it, plus `eslint` and
-    `@kairon/eslint-config` as direct devDependencies (pnpm doesn't hoist
+    `@kairon-render/eslint-config` as direct devDependencies (pnpm doesn't hoist
     binaries, same reason as `tsup` in P0-03/04) and a `"lint": "eslint ."`
     script. Prettier is configured once at the root (`.prettierrc.json`,
     `format` / `format:check` scripts) since it needs no per-package
@@ -84,25 +84,25 @@ forbidden imports; license check blocks non-allowed dependencies.
     package — `no-restricted-imports` over `node:module`'s `builtinModules`
     (both bare and `node:`-prefixed forms), for every environment except
     `"node"`.
-  - [x] Lint fails if `@kairon/schema` root entry imports React or DOM APIs —
+  - [x] Lint fails if `@kairon-render/schema` root entry imports React or DOM APIs —
     the `"isomorphic"` environment forbids `react`/`react-dom`/`react/jsx-runtime`
     imports and browser globals (`window`, `document`, ...) via
-    `no-restricted-globals`; `@kairon/schema`'s `eslint.config.js` calls
+    `no-restricted-globals`; `@kairon-render/schema`'s `eslint.config.js` calls
     `kaironConfig` twice (once per entry, each with its own `files` +
     `project`), since its two entries need different rules in the same package.
   - [x] Lint fails if the dependency graph from
     [04](../04-packages.md#dependency-graph) is violated — `kaironConfig`
-    computes `all @kairon/* packages − self − allowedInternalDeps` and feeds
+    computes `all @kairon-render/* packages − self − allowedInternalDeps` and feeds
     it to `no-restricted-imports`, so every package only has to state what it
     *is* allowed to import.
   - [x] Each rule has a failing fixture test —
     `tooling/eslint/index.test.js` runs `kaironConfig`'s output through
     ESLint's `Linter` class against real package tsconfigs (no mocking): one
     test per rule, plus one proving an *allowed* import is not flagged.
-    `pnpm --filter @kairon/eslint-config test` → 5/5 passing.
+    `pnpm --filter @kairon-render/eslint-config test` → 5/5 passing.
   - Verified end-to-end: `pnpm build && pnpm typecheck && pnpm lint && pnpm test`
     all green (12 packages lint, 10 packages test, including
-    `@kairon/eslint-config` itself).
+    `@kairon-render/eslint-config` itself).
   - Two real bugs found and fixed while wiring this up: (1) `eslint-plugin-react`
     does not support ESLint 10 yet (peer range caps at `^9.7`) — dropped it,
     kept only `eslint-plugin-react-hooks` (which does support 10) for
@@ -133,7 +133,7 @@ forbidden imports; license check blocks non-allowed dependencies.
   - Verified: `pnpm test:coverage` → 11 test files, 15 tests, 100% coverage
     (31/31 statements) — expected, since all source is still placeholders.
   - One real issue found: under `--coverage`, three of
-    `@kairon/eslint-config`'s fixture tests (P0-05) — the ones that spin up a
+    `@kairon-render/eslint-config`'s fixture tests (P0-05) — the ones that spin up a
     real TypeScript program via `projectService`/`project` — exceeded
     Vitest's default 5 s timeout (coverage instrumentation slows anything
     touching the TypeScript compiler). Fixed with a package-level
@@ -145,9 +145,9 @@ forbidden imports; license check blocks non-allowed dependencies.
 - **Depends on:** P0-04
 - **Refs:** [ADR 0002](../decisions/0002-monorepo-tooling.md)
 - **Done when:**
-  - [x] Changesets configured with all `@kairon/*` packages in one `fixed`
+  - [x] Changesets configured with all `@kairon-render/*` packages in one `fixed`
     group — [.changeset/config.json](../../.changeset/config.json) lists the
-    9 product packages explicitly (not a `@kairon/*` glob, which would also
+    9 product packages explicitly (not a `@kairon-render/*` glob, which would also
     match the private `tooling/*` packages); those 3 are listed in `ignore`
     instead, since Changesets would otherwise try to version them too.
   - [x] `pnpm changeset` documented in CONTRIBUTING — new "Versioning
@@ -172,8 +172,8 @@ forbidden imports; license check blocks non-allowed dependencies.
     check-licenses`) runs `pnpm licenses list --prod --json` (no extra
     dependency needed) and checks every reported license. Scope is
     production dependencies only, workspace-wide (including `tooling/*`'s
-    own real dependencies, e.g. `@kairon/eslint-config`'s) — devDependencies
-    never ship in a published `@kairon/*` package, so they're out of scope.
+    own real dependencies, e.g. `@kairon-render/eslint-config`'s) — devDependencies
+    never ship in a published `@kairon-render/*` package, so they're out of scope.
   - [x] Exceptions require an entry in an allowlist file with a reason —
     [license-allowlist.json](../../license-allowlist.json). Each entry's
     declared `license` is cross-checked against what is actually installed,
@@ -233,9 +233,9 @@ forbidden imports; license check blocks non-allowed dependencies.
 - **Refs:** [ADR 0003](../decisions/0003-vite-as-bundler.md)
 - **Done when:**
   - [x] Vite + React 19 app that imports workspace packages with hot
-    reload — [apps/playground](../../apps/playground) (`@kairon/playground`,
-    private). `pnpm --filter @kairon/playground dev` starts Vite; `src/App.tsx`
-    imports and renders `@kairon/core`'s placeholder, proving a real
+    reload — [apps/playground](../../apps/playground) (`@kairon-render/playground`,
+    private). `pnpm --filter @kairon-render/playground dev` starts Vite; `src/App.tsx`
+    imports and renders `@kairon-render/core`'s placeholder, proving a real
     cross-package import resolves (not a copy-pasted value). ESLint
     environment is `"browser"` with `allowedInternalDeps` listing all 9
     product packages, since a sandbox isn't meant to have a constrained
@@ -244,11 +244,11 @@ forbidden imports; license check blocks non-allowed dependencies.
     confirmed React Fast Refresh is injected and TSX is transpiled; editing
     `App.tsx` live-updated the served module immediately (own-source hot
     reload). `pnpm build` produces a working production bundle.
-  - **Real nuance found and worth recording:** editing `@kairon/core`'s
+  - **Real nuance found and worth recording:** editing `@kairon-render/core`'s
     `src/index.tsx` alone does **not** update the playground. `exports` in
     every package points at `dist/`, so Vite resolves and serves the *built*
     output (`/@fs/.../packages/core/dist/index.js`) — confirmed by reading
-    what it actually served. Running `pnpm --filter @kairon/core build`
+    what it actually served. Running `pnpm --filter @kairon-render/core build`
     updates the content Vite serves immediately (no dev-server restart
     needed), so the real inner loop today is **edit → build → see it**, not
     continuous live cross-package reload — no package has a `tsup --watch`
@@ -264,12 +264,12 @@ forbidden imports; license check blocks non-allowed dependencies.
     that one `minimumReleaseAgeExclude` entry, with a comment explaining why
     it's a real exception rather than one we engineered around.
   - **A real, repo-wide bug found via CI, not locally.** The pipeline passed
-    on this machine but `@kairon/playground`'s lint failed on GitHub Actions
+    on this machine but `@kairon-render/playground`'s lint failed on GitHub Actions
     with `@typescript-eslint/no-unsafe-call` on `corePlaceholder()`. Cause:
     `turbo.json`'s `lint` task had no `dependsOn`, so on a genuinely fresh
     checkout (`dist/` is gitignored, never committed) nothing built
-    `@kairon/core` before linting its *consumer* — type-aware linting
-    couldn't resolve `@kairon/core`'s types (its `exports` point at
+    `@kairon-render/core` before linting its *consumer* — type-aware linting
+    couldn't resolve `@kairon-render/core`'s types (its `exports` point at
     `dist/*.d.ts`), so the import fell back to `any`. It passed locally only
     because `dist/` already existed from manual testing earlier in this
     session, masking the bug. This wasn't playground-specific: the same
@@ -278,7 +278,7 @@ forbidden imports; license check blocks non-allowed dependencies.
     [04](../04-packages.md#dependency-graph)). Fixed by adding
     `"dependsOn": ["^build"]` to the `lint` task, matching `typecheck`/`test`
     — verified by wiping every `dist/` and `.turbo` and re-running `pnpm
-    lint` alone: Turbo now builds `@kairon/core` first, automatically.
+    lint` alone: Turbo now builds `@kairon-render/core` first, automatically.
 
 ### P0-11 · CONTRIBUTING and PR template
 - **Type:** docs · **Package:** root · **Size:** S
@@ -309,8 +309,50 @@ forbidden imports; license check blocks non-allowed dependencies.
 - **Depends on:** —
 - **Refs:** [11 — trademark](../11-legal-and-clean-room.md#trademark)
 - **Done when:**
-  - [ ] `@kairon` npm organization created (or an alternative scope chosen and docs updated).
-  - [ ] Trademark search for "Kairon" in software classes done; result noted.
+  - [x] `@kairon` npm organization created (or an alternative scope chosen
+    and docs updated) — **`@kairon` was already taken**, by an unrelated
+    product (`heykairon`, a LinkedIn-outreach/MCP tool) that had already
+    published `@kairon/cli` — the exact package name our own
+    [09](../09-api-design.md) had planned for the CLI. Checked via the
+    public registry API (`registry.npmjs.org/-/org/<scope>/package`, no
+    auth needed) before assuming anything.
+  - [x] Trademark search for "Kairon" in software classes done; result
+    noted — informal web research (not a formal USPTO TESS/legal search;
+    see the caveat below), which also surfaced a second, more significant
+    prior user: **[Kairon](https://github.com/digiteinfotech/kairon)**, an
+    established open-source conversational-AI/chatbot platform (Apache 2.0,
+    GitHub + ProductHunt presence) by digiteinfotech/NimbleWork. No evidence
+    of either party holding a *registered* trademark was found, but prior
+    use in commerce can itself create common-law trademark rights in the US.
+  - **Decision (asked the user, did not decide unilaterally — this touches
+    branding across the whole project):** keep the product name **"Kairon
+    Render"** as-is, and move the **npm scope** to **`@kairon-render`**
+    instead of `@kairon`. Confirmed available (scope, bare package name,
+    and GitHub namespace) before committing to it.
+  - Renamed all 13 workspace packages (9 product + `playground` +
+    `tsconfig`/`tsup-config`/`eslint-config`) and every `@kairon/` reference
+    across the repo (~95 files: package.json names/deps, source, `eslint.config.js`
+    files, `@kairon/eslint-config`'s own internal scope logic, and every doc)
+    to `@kairon-render/`. One bulk, unambiguous find-and-replace — checked
+    first that no occurrence of the literal string `@kairon/` meant anything
+    other than the npm scope. Two stray references in non-matched file
+    extensions (`pnpm-workspace.yaml`'s `.yaml`, `scripts/check-licenses.mjs`'s
+    `.mjs`) were missed by the first pass and fixed in a follow-up sweep of
+    the whole tree, not just the extensions originally grepped for.
+  - Verified for real: full clean reinstall (`rm -rf node_modules
+    */*/node_modules */*/dist .turbo pnpm-lock.yaml && pnpm install`), then
+    `pnpm build && typecheck && lint && test && check-licenses &&
+    format:check` — all green. The product/brand name "Kairon" and
+    "Kairon Render" themselves are untouched everywhere (prose, `KaironError`,
+    `kairon.config.ts`, the `kairon` CLI command name) — only the literal
+    npm scope changed.
+  - **Caveat, stated plainly:** this was web research, not a professional
+    trademark search (USPTO TESS, EUIPO, common-law/state search) or legal
+    advice — consistent with [doc 11](../11-legal-and-clean-room.md)'s own
+    disclaimer. Worth a real search (and a lawyer's read on the
+    digiteinfotech "Kairon" prior-use risk specifically) before any public
+    launch, trademark filing, or domain purchase — tracked in
+    [P6-01](phase-6-release.md).
 
 ### P0-13 · ADR: error model and shared isomorphic code
 - **Type:** adr · **Package:** — · **Size:** S
@@ -318,7 +360,7 @@ forbidden imports; license check blocks non-allowed dependencies.
 - **Refs:** [09 — errors](../09-api-design.md#errors), [04](../04-packages.md)
 - **Why now:** `KaironError` is needed by `schema` (anywhere), `core` (browser) and `renderer` (Node). The docs do not say where it lives.
 - **Decide:**
-  - Where shared isomorphic code lives: inside `@kairon/schema` root, or a new small `@kairon/shared` package.
+  - Where shared isomorphic code lives: inside `@kairon-render/schema` root, or a new small `@kairon-render/shared` package.
   - `KaironError` shape, code naming (`KAIRON_E_<AREA>_<NAME>`), warnings vs errors.
   - Where the error code catalog is defined so docs can be generated from it.
 - **Done when:**

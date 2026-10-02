@@ -33,7 +33,7 @@ markdown content is used for the changelog.
 
 See [docs/tasks/phase-0-foundation.md](../docs/tasks/phase-0-foundation.md)
 (P0-07) and [ADR 0002](../docs/decisions/0002-monorepo-tooling.md): all
-`@kairon/*` product packages (`core`, `schema`, `media`, `captions`,
+`@kairon-render/*` product packages (`core`, `schema`, `media`, `captions`,
 `transitions`, `player`, `bundler`, `renderer`, `cli`) are in one `fixed`
 group, so they are always released together at the same version. The
 `tooling/*` packages are private and are never released, so they are

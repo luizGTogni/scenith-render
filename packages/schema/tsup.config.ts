@@ -1,7 +1,7 @@
 import { defineConfig } from "tsup";
-import { kaironPreset } from "@kairon/tsup-config";
+import { kaironPreset } from "@kairon-render/tsup-config";
 
-// `@kairon/schema` has two entries (see docs/08-scene-schema.md and
+// `@kairon-render/schema` has two entries (see docs/08-scene-schema.md and
 // docs/04-packages.md#environment-boundaries):
 //   - `.`       isomorphic, must type-check with no DOM lib (tsconfig.json)
 //   - `./react` browser-only, needs DOM + JSX (tsconfig.react.json)

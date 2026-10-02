@@ -17,7 +17,7 @@ identical frames twice.
 | P2-05 | ADR: chunk grid size and segment encoding parameters | adr | S | P2-02 | todo |
 | **Runtime** |||||
 | P2-06 | Page bridge and rendering frame driver | feat | M | P1-15, P1-16 | todo |
-| **Output** — `@kairon/renderer` |||||
+| **Output** — `@kairon-render/renderer` |||||
 | P2-07 | Browser management | feat | M | P2-04 | todo |
 | P2-08 | FFmpeg locator and capability probe | feat | M | P2-02 | todo |
 | P2-09 | Standard runtime build and local server | feat | M | P2-06 | todo |
@@ -27,7 +27,7 @@ identical frames twice.
 | P2-13 | Assemble: concat, atomic write, cleanup | feat | S | P2-12 | todo |
 | P2-14 | `renderVideo` (single worker), progress, cancellation | feat | M | P2-10, P2-11, P2-13 | todo |
 | P2-15 | `renderImage` | feat | S | P2-10, P2-11 | todo |
-| **Interface** — `@kairon/cli` |||||
+| **Interface** — `@kairon-render/cli` |||||
 | P2-16 | CLI skeleton and `kairon.config.ts` loading | feat | M | P0-04 | todo |
 | P2-17 | `kairon render`, `image`, `validate` | feat | M | P2-14, P2-15, P2-16 | todo |
 | **Verification** |||||
