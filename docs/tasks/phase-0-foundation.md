@@ -14,7 +14,7 @@ forbidden imports; license check blocks non-allowed dependencies.
 | P0-04 | Scaffold all packages | infra | M | P0-03 | done |
 | P0-05 | Lint, format and environment-boundary rules | infra | M | P0-03, P0-04 | done |
 | P0-06 | Vitest setup | infra | S | P0-03 | done |
-| P0-07 | Changesets with fixed versioning | infra | S | P0-04 | todo |
+| P0-07 | Changesets with fixed versioning | infra | S | P0-04 | done |
 | P0-08 | Dependency license check | infra | S | P0-01 | todo |
 | P0-09 | CI workflow | infra | M | P0-02, P0-05, P0-06, P0-08 | todo |
 | P0-10 | Playground app | infra | S | P0-04 | todo |
@@ -145,8 +145,21 @@ forbidden imports; license check blocks non-allowed dependencies.
 - **Depends on:** P0-04
 - **Refs:** [ADR 0002](../decisions/0002-monorepo-tooling.md)
 - **Done when:**
-  - [ ] Changesets configured with all `@kairon/*` packages in one `fixed` group.
-  - [ ] `pnpm changeset` documented in CONTRIBUTING.
+  - [x] Changesets configured with all `@kairon/*` packages in one `fixed`
+    group — [.changeset/config.json](../../.changeset/config.json) lists the
+    9 product packages explicitly (not a `@kairon/*` glob, which would also
+    match the private `tooling/*` packages); those 3 are listed in `ignore`
+    instead, since Changesets would otherwise try to version them too.
+  - [x] `pnpm changeset` documented in CONTRIBUTING — new "Versioning
+    (Changesets)" section in [CONTRIBUTING.md](../../CONTRIBUTING.md).
+  - Verified with a throwaway changeset (not committed): `pnpm changeset
+    version` bumped all 9 product packages from `0.0.0` to `0.0.1` together
+    and generated a `CHANGELOG.md` for each, while the 3 `tooling/*`
+    packages stayed untouched. Then reverted (`git checkout` the
+    `package.json`s, removed the generated changelogs) — this task adds no
+    version bumps, just the configuration.
+  - `pnpm changeset:version` / `pnpm changeset publish` are wired for later:
+    the actual release run is built in [P6-07](phase-6-release.md).
 
 ### P0-08 · Dependency license check
 - **Type:** infra · **Package:** root · **Size:** S

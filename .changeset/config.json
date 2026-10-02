@@ -1,0 +1,23 @@
+{
+  "$schema": "https://unpkg.com/@changesets/config@4.0.1/schema.json",
+  "changelog": "@changesets/cli/changelog",
+  "commit": false,
+  "fixed": [
+    [
+      "@kairon/core",
+      "@kairon/schema",
+      "@kairon/media",
+      "@kairon/captions",
+      "@kairon/transitions",
+      "@kairon/player",
+      "@kairon/bundler",
+      "@kairon/renderer",
+      "@kairon/cli"
+    ]
+  ],
+  "linked": [],
+  "access": "public",
+  "baseBranch": "main",
+  "updateInternalDependencies": "patch",
+  "ignore": ["@kairon/tsconfig", "@kairon/tsup-config", "@kairon/eslint-config"]
+}

@@ -68,3 +68,29 @@ git config core.hooksPath .githooks
 ```
 
 (After Phase 0 this runs automatically from the root `prepare` script.)
+
+## Versioning (Changesets)
+
+All `@kairon/*` product packages (`core`, `schema`, `media`, `captions`,
+`transitions`, `player`, `bundler`, `renderer`, `cli`) are versioned and
+released together, as one `fixed` [Changesets](https://github.com/changesets/changesets)
+group — see [ADR 0002](docs/decisions/0002-monorepo-tooling.md) and
+[P0-07](docs/tasks/phase-0-foundation.md). The `tooling/*` packages are
+private and are never released, so Changesets ignores them entirely.
+
+Any PR that changes a published package's behavior needs a changeset:
+
+```bash
+pnpm changeset
+```
+
+This asks which package(s) changed (picking any one `fixed`-group package
+bumps the whole group together) and the bump type (patch / minor / major),
+then opens an editor for the changelog entry. Commit the generated
+`.changeset/<name>.md` file alongside your change. Docs-only, test-only, or
+internal tooling changes usually don't need one.
+
+Releasing (`pnpm changeset:version` to bump versions and changelogs,
+`pnpm changeset publish` to publish to npm) is not a contributor task — it
+runs through the release pipeline built in
+[P6-07](docs/tasks/phase-6-release.md).

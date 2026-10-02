@@ -17,9 +17,12 @@
     "test:coverage": "vitest run --coverage",
     "dev": "turbo run dev",
     "format": "prettier --write .",
-    "format:check": "prettier --check ."
+    "format:check": "prettier --check .",
+    "changeset": "changeset",
+    "changeset:version": "changeset version"
   },
   "devDependencies": {
+    "@changesets/cli": "^3.0.3",
     "@vitest/coverage-v8": "5.0.3",
     "prettier": "^3.9.9",
     "turbo": "^2.11.5",
