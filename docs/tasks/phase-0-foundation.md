@@ -16,7 +16,7 @@ forbidden imports; license check blocks non-allowed dependencies.
 | P0-06 | Vitest setup | infra | S | P0-03 | done |
 | P0-07 | Changesets with fixed versioning | infra | S | P0-04 | done |
 | P0-08 | Dependency license check | infra | S | P0-01 | done |
-| P0-09 | CI workflow | infra | M | P0-02, P0-05, P0-06, P0-08 | doing |
+| P0-09 | CI workflow | infra | M | P0-02, P0-05, P0-06, P0-08 | done |
 | P0-10 | Playground app | infra | S | P0-04 | todo |
 | P0-11 | CONTRIBUTING and PR template | docs | S | — | todo |
 | P0-12 | Reserve npm scope and check trademark | infra | S | — | todo |
@@ -202,18 +202,18 @@ forbidden imports; license check blocks non-allowed dependencies.
     `pnpm/setup@v3`'s `cache: true` handles the pnpm store; `actions/cache`
     handles Turborepo's local `.turbo` cache (no remote cache is configured,
     so this is what makes CI reuse results across runs, not just within one).
-  - [ ] **Main branch protected: CI must pass — cannot be done from here.**
-    This repository has no git remote yet (`git remote -v` is empty); branch
-    protection is a GitHub repository setting, not something a workflow file
-    can express, and creating a remote repo is outside this task's scope (an
-    outward-facing, hard-to-reverse action nobody asked for). Once this repo
-    is pushed to GitHub and the workflow above has run at least once, enable
-    it: **Settings → Branches → Add rule** for `main` → "Require status
-    checks to pass before merging" → select this workflow's job. Revisit
-    this task (status `doing`, not `done`) at that point.
+  - [x] Main branch protected: CI must pass — the repo is now pushed to
+    [github.com/luizGTogni/kairon-render](https://github.com/luizGTogni/kairon-render)
+    (public); the `CI` workflow ran for real on push (1m11s, all green:
+    https://github.com/luizGTogni/kairon-render/actions/runs/36948468240).
+    Branch protection on `main` set via `gh api .../branches/main/protection`:
+    required status check `lint, typecheck, test, build, license check`
+    (strict — branch must be up to date), `enforce_admins: true`, force
+    pushes and deletions disabled. Verified by reading the protection back.
   - Verified locally, running the exact sequence from the workflow
     (`pnpm install --frozen-lockfile` through `pnpm test:coverage`, from a
-    cleared `.turbo` cache): all green.
+    cleared `.turbo` cache): all green. Then confirmed for real on GitHub
+    (see above) — not just locally.
   - Workflow validated with `actionlint` (no local install needed — ran the
     released binary directly): 0 errors.
   - Switched to `pnpm/setup@v3` instead of the more commonly documented

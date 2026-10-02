@@ -1,5 +1,7 @@
 # Kairon Render
 
+[![CI](https://github.com/luizGTogni/kairon-render/actions/workflows/ci.yml/badge.svg)](https://github.com/luizGTogni/kairon-render/actions/workflows/ci.yml)
+
 > Video from data. Frame-perfect, deterministic, AI-ready.
 
 Kairon Render turns a JSON **scene** — written by an editor, an AI agent or a
@@ -30,7 +32,10 @@ kairon render scene.json out/hello.mp4
 
 ## Status
 
-Planning. No code yet. Start with the documentation in [`docs/`](docs/README.md).
+Phase 0 (monorepo foundation) is underway — see
+[docs/tasks/phase-0-foundation.md](docs/tasks/phase-0-foundation.md). No
+package has real functionality yet. Start with the documentation in
+[`docs/`](docs/README.md).
 
 ## Requirements
 
