@@ -1,0 +1,79 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  ci:
+    name: lint, typecheck, test, build, license check
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      # Installs pnpm (reading the pinned version from `packageManager` in
+      # package.json) and Node.js (auto-detected from .nvmrc), and caches
+      # the pnpm store — replaces pnpm/action-setup + actions/setup-node.
+      - name: Install pnpm and Node.js
+        uses: pnpm/setup@v3
+        with:
+          install: false
+          cache: true
+
+      # Caches Turborepo's local task cache (per docs/tasks/README.md, every
+      # `pnpm build|typecheck|lint|test` run goes through it). No remote
+      # cache is configured (see every `turbo run` output: "Remote caching
+      # disabled"), so this is what makes an unchanged package's tasks a
+      # cache hit across CI runs instead of just within one.
+      - name: Cache Turborepo
+        uses: actions/cache@v6
+        with:
+          path: .turbo
+          key: turbo-${{ runner.os }}-${{ github.sha }}
+          restore-keys: |
+            turbo-${{ runner.os }}-
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Format check
+        run: pnpm format:check
+
+      - name: Lint
+        run: pnpm lint
+
+      - name: Typecheck
+        run: pnpm typecheck
+
+      - name: Test
+        run: pnpm test
+
+      - name: Build
+        run: pnpm build
+
+      - name: Check dependency licenses
+        run: pnpm check-licenses
+
+      # Fulfills docs/tasks/phase-0-foundation.md (P0-06): "Coverage report
+      # generated in CI." `pnpm test:coverage` is a separate, uninstrumented
+      # root-level run (see vitest.config.ts) — not part of the cached,
+      # per-package `pnpm test` above — so it doesn't slow that down.
+      - name: Coverage report
+        run: pnpm test:coverage
+
+      - name: Upload coverage report
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: coverage-report
+          path: coverage/
+          retention-days: 14

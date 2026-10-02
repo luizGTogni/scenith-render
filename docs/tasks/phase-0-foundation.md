@@ -16,7 +16,7 @@ forbidden imports; license check blocks non-allowed dependencies.
 | P0-06 | Vitest setup | infra | S | P0-03 | done |
 | P0-07 | Changesets with fixed versioning | infra | S | P0-04 | done |
 | P0-08 | Dependency license check | infra | S | P0-01 | done |
-| P0-09 | CI workflow | infra | M | P0-02, P0-05, P0-06, P0-08 | todo |
+| P0-09 | CI workflow | infra | M | P0-02, P0-05, P0-06, P0-08 | doing |
 | P0-10 | Playground app | infra | S | P0-04 | todo |
 | P0-11 | CONTRIBUTING and PR template | docs | S | — | todo |
 | P0-12 | Reserve npm scope and check trademark | infra | S | — | todo |
@@ -194,9 +194,32 @@ forbidden imports; license check blocks non-allowed dependencies.
 - **Type:** infra · **Package:** `.github/` · **Size:** M
 - **Depends on:** P0-02, P0-05, P0-06, P0-08
 - **Done when:**
-  - [ ] On every PR: install, lint, typecheck, test, build, license check.
-  - [ ] pnpm store and Turbo cache are cached between runs.
-  - [ ] Main branch protected: CI must pass.
+  - [x] On every PR: install, lint, typecheck, test, build, license check —
+    [.github/workflows/ci.yml](../../.github/workflows/ci.yml). Also runs
+    `format:check` and `test:coverage` (uploaded as an artifact), fulfilling
+    the "generated in CI" half of P0-06 that was deferred here.
+  - [x] pnpm store and Turbo cache are cached between runs —
+    `pnpm/setup@v3`'s `cache: true` handles the pnpm store; `actions/cache`
+    handles Turborepo's local `.turbo` cache (no remote cache is configured,
+    so this is what makes CI reuse results across runs, not just within one).
+  - [ ] **Main branch protected: CI must pass — cannot be done from here.**
+    This repository has no git remote yet (`git remote -v` is empty); branch
+    protection is a GitHub repository setting, not something a workflow file
+    can express, and creating a remote repo is outside this task's scope (an
+    outward-facing, hard-to-reverse action nobody asked for). Once this repo
+    is pushed to GitHub and the workflow above has run at least once, enable
+    it: **Settings → Branches → Add rule** for `main` → "Require status
+    checks to pass before merging" → select this workflow's job. Revisit
+    this task (status `doing`, not `done`) at that point.
+  - Verified locally, running the exact sequence from the workflow
+    (`pnpm install --frozen-lockfile` through `pnpm test:coverage`, from a
+    cleared `.turbo` cache): all green.
+  - Workflow validated with `actionlint` (no local install needed — ran the
+    released binary directly): 0 errors.
+  - Switched to `pnpm/setup@v3` instead of the more commonly documented
+    `pnpm/action-setup` + `actions/setup-node` pair: one step installs pnpm
+    (from `packageManager` in `package.json`) *and* Node.js (auto-detected
+    from `.nvmrc`), with built-in pnpm-store caching.
 
 ### P0-10 · Playground app
 - **Type:** infra · **Package:** `apps/playground` · **Size:** S
