@@ -1,0 +1,12 @@
+dist
+coverage
+node_modules
+.turbo
+pnpm-lock.yaml
+
+# Markdown is hand-formatted. Prettier's markdown printer treats a leading
+# "+"/"-" after a bullet ("- + pro", "- − con", our ADR convention for pros
+# and cons) as a nested list marker and rewrites it to "- -", corrupting the
+# content — see docs/tasks/phase-0-foundation.md (P0-05) for how this was
+# found. Re-evaluate only alongside a pass that also changes that convention.
+*.md

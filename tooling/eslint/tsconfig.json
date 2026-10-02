@@ -1,0 +1,7 @@
+{
+  "extends": "../typescript/node.json",
+  "compilerOptions": {
+    "noEmit": true
+  },
+  "include": ["index.d.ts"]
+}

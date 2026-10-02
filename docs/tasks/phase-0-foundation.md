@@ -12,7 +12,7 @@ forbidden imports; license check blocks non-allowed dependencies.
 | P0-02 | Turborepo task pipeline | infra | S | P0-01 | done |
 | P0-03 | Shared TypeScript and build presets | infra | S | P0-01 | done |
 | P0-04 | Scaffold all packages | infra | M | P0-03 | done |
-| P0-05 | Lint, format and environment-boundary rules | infra | M | P0-03, P0-04 | todo |
+| P0-05 | Lint, format and environment-boundary rules | infra | M | P0-03, P0-04 | done |
 | P0-06 | Vitest setup | infra | S | P0-03 | todo |
 | P0-07 | Changesets with fixed versioning | infra | S | P0-04 | todo |
 | P0-08 | Dependency license check | infra | S | P0-01 | todo |
@@ -70,11 +70,46 @@ forbidden imports; license check blocks non-allowed dependencies.
 - **Depends on:** P0-03, P0-04
 - **Refs:** [04 — environment boundaries](../04-packages.md#environment-boundaries)
 - **Done when:**
-  - [ ] ESLint + Prettier configured for all packages.
-  - [ ] Lint fails if a browser package imports Node built-ins or a Node package.
-  - [ ] Lint fails if `@kairon/schema` root entry imports React or DOM APIs.
-  - [ ] Lint fails if the dependency graph from [04](../04-packages.md#dependency-graph) is violated.
-  - [ ] Each rule has a failing fixture test.
+  - [x] ESLint + Prettier configured for all packages. `tooling/eslint`
+    (`@kairon/eslint-config`) exports `kaironConfig({ package, environment,
+    allowedInternalDeps, tsconfigRootDir, files?, project? })`; every package
+    (the 9 product packages + the `tooling/*` packages themselves) has its
+    own tiny `eslint.config.js` calling it, plus `eslint` and
+    `@kairon/eslint-config` as direct devDependencies (pnpm doesn't hoist
+    binaries, same reason as `tsup` in P0-03/04) and a `"lint": "eslint ."`
+    script. Prettier is configured once at the root (`.prettierrc.json`,
+    `format` / `format:check` scripts) since it needs no per-package
+    parameterization.
+  - [x] Lint fails if a browser package imports Node built-ins or a Node
+    package — `no-restricted-imports` over `node:module`'s `builtinModules`
+    (both bare and `node:`-prefixed forms), for every environment except
+    `"node"`.
+  - [x] Lint fails if `@kairon/schema` root entry imports React or DOM APIs —
+    the `"isomorphic"` environment forbids `react`/`react-dom`/`react/jsx-runtime`
+    imports and browser globals (`window`, `document`, ...) via
+    `no-restricted-globals`; `@kairon/schema`'s `eslint.config.js` calls
+    `kaironConfig` twice (once per entry, each with its own `files` +
+    `project`), since its two entries need different rules in the same package.
+  - [x] Lint fails if the dependency graph from
+    [04](../04-packages.md#dependency-graph) is violated — `kaironConfig`
+    computes `all @kairon/* packages − self − allowedInternalDeps` and feeds
+    it to `no-restricted-imports`, so every package only has to state what it
+    *is* allowed to import.
+  - [x] Each rule has a failing fixture test —
+    `tooling/eslint/index.test.js` runs `kaironConfig`'s output through
+    ESLint's `Linter` class against real package tsconfigs (no mocking): one
+    test per rule, plus one proving an *allowed* import is not flagged.
+    `pnpm --filter @kairon/eslint-config test` → 5/5 passing.
+  - Verified end-to-end: `pnpm build && pnpm typecheck && pnpm lint && pnpm test`
+    all green (12 packages lint, 10 packages test, including
+    `@kairon/eslint-config` itself).
+  - Two real bugs found and fixed while wiring this up: (1) `eslint-plugin-react`
+    does not support ESLint 10 yet (peer range caps at `^9.7`) — dropped it,
+    kept only `eslint-plugin-react-hooks` (which does support 10) for
+    `rules-of-hooks`/`exhaustive-deps`. (2) Prettier's markdown printer treats
+    a leading `+`/`-` after a bullet as a *nested* list marker and rewrites
+    `- + pro` to `- - pro`, corrupting every ADR's pros/cons list — `*.md` is
+    now excluded in `.prettierignore` until that convention changes.
 
 ### P0-06 · Vitest setup
 - **Type:** infra · **Package:** root · **Size:** S

@@ -12,5 +12,12 @@
   ],
   "dependencies": {
     "tsup": "^8.5.1"
+  },
+  "scripts": {
+    "lint": "eslint ."
+  },
+  "devDependencies": {
+    "@kairon/eslint-config": "workspace:*",
+    "eslint": "^10.11.0"
   }
 }

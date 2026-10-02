@@ -4,8 +4,6 @@ import { placeholder } from "./index.js";
 describe("@kairon/captions", () => {
   it("builds a placeholder element", () => {
     const element = placeholder();
-    expect(element.props["data-kairon-placeholder"]).toBe(
-      "@kairon/captions",
-    );
+    expect(element.props["data-kairon-placeholder"]).toBe("@kairon/captions");
   });
 });

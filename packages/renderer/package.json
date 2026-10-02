@@ -21,13 +21,16 @@
   },
   "scripts": {
     "build": "tsup",
-    "typecheck": "tsc -p tsconfig.json --noEmit",
-    "test": "vitest run"
+    "lint": "eslint .",
+    "test": "vitest run",
+    "typecheck": "tsc -p tsconfig.json --noEmit"
   },
   "devDependencies": {
+    "@kairon/eslint-config": "workspace:*",
     "@kairon/tsconfig": "workspace:*",
     "@kairon/tsup-config": "workspace:*",
     "@types/node": "^26.6.3",
+    "eslint": "^10.11.0",
     "tsup": "^8.5.1",
     "typescript": "5.9.3",
     "vitest": "^5.0.3"

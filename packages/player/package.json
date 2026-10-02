@@ -21,16 +21,19 @@
   },
   "scripts": {
     "build": "tsup",
-    "typecheck": "tsc -p tsconfig.json --noEmit",
-    "test": "vitest run"
+    "lint": "eslint .",
+    "test": "vitest run",
+    "typecheck": "tsc -p tsconfig.json --noEmit"
   },
   "peerDependencies": {
     "react": "^19.0.0"
   },
   "devDependencies": {
+    "@kairon/eslint-config": "workspace:*",
     "@kairon/tsconfig": "workspace:*",
     "@kairon/tsup-config": "workspace:*",
     "@types/react": "^19.3.0",
+    "eslint": "^10.11.0",
     "jsdom": "^30.1.1",
     "react": "^19.3.0",
     "tsup": "^8.5.1",
